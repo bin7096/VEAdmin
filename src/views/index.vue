@@ -1,7 +1,7 @@
 <template class="box">
     <div class="box">
-        <navigateTop v-bind:leftnavfold="leftNavFold"></navigateTop>
-        <navigateLeft v-bind:leftnavfold="leftNavFold"></navigateLeft>
+        <navigateTop :leftnavfold="leftNavFold" @foldChanged="test"></navigateTop>
+        <navigateLeft :leftnavfold="leftNavFold"></navigateLeft>
     </div>
 </template>
 <style>
@@ -17,12 +17,20 @@ export default {
     name: 'App',
     data(){
         return {
-            leftNavFold : false,
+            leftNavFold : true,
         };
     },
     components: {
         "navigateTop": navigateTop,
         "navigateLeft": navigateLeft
+    },
+    methods: {
+        test: function (val) {
+            this.$nextTick(function () {
+                this.leftNavFold = val;
+                console.log(this.leftNavFold);
+            });
+        }
     }
 }
 </script>

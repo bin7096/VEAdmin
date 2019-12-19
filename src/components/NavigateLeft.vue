@@ -1,5 +1,5 @@
 <template>
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="leftnavfold">
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
         <el-submenu index="1">
             <template slot="title">
             <i class="el-icon-location"></i>
@@ -47,8 +47,11 @@
         props: ['leftnavfold'],
         data() {
             return {
-                isCollapse: true
+                isCollapse: this.leftnavfold
             };
+        },
+        created(){
+            console.log(this.leftnavfold);
         },
         methods: {
             handleOpen(key, keyPath) {
@@ -56,7 +59,13 @@
             },
             handleClose(key, keyPath) {
                 console.log(key, keyPath);
+            },
+            changeData: function () {
+                this.isCollapse = this.leftnavfold
             }
+        },
+        watch: {
+            leftnavfold: "changeData"
         }
     }
 </script>

@@ -1,8 +1,9 @@
 <template>
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#67C23A">
         <el-menu-item class="logo">VEAdmin v1.0</el-menu-item>
-        <el-menu-item>
-            <i class="el-icon-s-unfold"></i>
+        <el-menu-item @click="changeFold()">
+            <i class="el-icon-s-unfold" v-if="isCollapse"></i>
+            <i class="el-icon-s-fold" v-else></i>
         </el-menu-item>
         <el-menu-item index="1">处理中心</el-menu-item>
         <el-submenu index="2">
@@ -28,15 +29,26 @@
 </style>
 <script>
 export default {
+    props: ['leftnavfold'],
     data() {
         return {
-            activeIndex: '1'
+            activeIndex: '1',
+            isCollapse: this.leftnavfold
         };
     },
     methods: {
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
+        },
+        changeFold: function () {
+            this.$emit("foldChanged", !this.isCollapse);
+        },
+        changeData: function () {
+            this.isCollapse = this.leftnavfold;
         }
+    },
+    watch: {
+        leftnavfold: "changeData"
     }
 }
 </script>
