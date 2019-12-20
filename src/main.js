@@ -1,5 +1,6 @@
 // 清除默认样式
 import './assets/css/init.css';
+import './assets/css/layui.css';
 
 import Vue from 'vue';
 import Vuex from 'vuex';

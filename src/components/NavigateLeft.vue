@@ -1,21 +1,25 @@
 <template>
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#ffd04b" :collapse="isCollapse">
+    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
+        <el-menu-item class="logo">
+            <i class="el-icon-s-grid"></i>
+            <span slot="title">Admin v1.0 beta</span>
+        </el-menu-item>
         <el-submenu index="1">
             <template slot="title">
-            <i class="el-icon-location"></i>
-            <span slot="title">导航一</span>
+                <i class="el-icon-location"></i>
+                <span slot="title">导航一</span>
             </template>
             <el-menu-item-group>
-            <span slot="title">分组一</span>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
+                <span slot="title">分组一</span>
+                <el-menu-item index="1-1">选项1</el-menu-item>
+                <el-menu-item index="1-2">选项2</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
-            <el-menu-item index="1-3">选项3</el-menu-item>
+                <el-menu-item index="1-3">选项3</el-menu-item>
             </el-menu-item-group>
             <el-submenu index="1-4">
-            <span slot="title">选项4</span>
-            <el-menu-item index="1-4-1">选项1</el-menu-item>
+                <span slot="title">选项4</span>
+                <el-menu-item index="1-4-1">选项1</el-menu-item>
             </el-submenu>
         </el-submenu>
         <el-menu-item index="2">
@@ -35,23 +39,30 @@
 <style>
     .el-menu-vertical-demo{
         height: 100%;
-        font-weight: bold;
+        border: none;
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
-        min-height: 400px;
+        height: 100%;
+    }
+    .logo{
+        background-color: #226A62 !important;
+        height: 60px;
+    }
+    .is-active{
+        background-color: #009688 !important;
     }
 </style>
 <script>
     export default {
-        props: ['leftnavfold'],
+        props: ['leftNavFold'],
         data() {
             return {
-                isCollapse: this.leftnavfold
+                isCollapse: this.leftNavFold
             };
         },
         created(){
-            console.log(this.leftnavfold);
+            console.log(this.leftNavFold);
         },
         methods: {
             handleOpen(key, keyPath) {
@@ -61,11 +72,11 @@
                 console.log(key, keyPath);
             },
             changeData: function () {
-                this.isCollapse = this.leftnavfold
+                this.isCollapse = this.leftNavFold
             }
         },
         watch: {
-            leftnavfold: "changeData"
+            leftNavFold: "changeData"
         }
     }
 </script>

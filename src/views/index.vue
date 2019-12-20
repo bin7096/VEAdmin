@@ -1,13 +1,31 @@
 <template class="box">
     <div class="box">
-        <navigateTop :leftnavfold="leftNavFold" @foldChanged="test"></navigateTop>
-        <navigateLeft :leftnavfold="leftNavFold"></navigateLeft>
+        <div class="left-box">
+            <navigateLeft :leftNavFold="leftNavFold"></navigateLeft>
+        </div>
+        <div class="right-box">
+            <navigateTop :leftNavFold="leftNavFold" :isFullScreen="isFullScreen" @foldChanged="change"></navigateTop>
+            <div class="iframe-box"></div>
+        </div>
     </div>
 </template>
 <style>
     #app,.box{
         width: 100%;
         height: 100%;
+    }
+    .box{
+        display: flex;
+    }
+    .left-box, .right-box{
+        height: 100%;
+    }
+    .right-box{
+        width: calc(100% - 64px);
+    }
+    .iframe-box{
+        background-color: #009688;
+        height: calc(100% - 60px);
     }
 </style>
 <script>
@@ -17,6 +35,7 @@ export default {
     name: 'App',
     data(){
         return {
+            isFullScreen: false,
             leftNavFold : true,
         };
     },
@@ -25,11 +44,37 @@ export default {
         "navigateLeft": navigateLeft
     },
     methods: {
-        test: function (val) {
+        // NavigateTop中修改了侧边栏的折叠状态并抛出状态值，由change方法接收并更新
+        change: function (val) {
             this.$nextTick(function () {
                 this.leftNavFold = val;
-                console.log(this.leftNavFold);
             });
+        },
+        requestFullScreen: function() {
+            let element = document.getElementById('app');
+            //某个元素有请求    
+            let requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+            if (requestMethod) {     
+                requestMethod.call(element);
+            } else if (typeof window.ActiveXObject !== "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{F11}");
+                }   
+            }
+            this.isFullScreen = true;
+        },
+        closeFullScreen: function () {
+            let closeMethod = document.exitFullscreen || document.mozCancelFullScreen || document.webkitCancelFullScreen || document.msExitFullscreen;
+            if (closeMethod) {     
+                closeMethod.call(document);
+            } else if (typeof window.ActiveXObject !== "undefined") {
+                let wscript = new ActiveXObject("WScript.Shell");
+                if (wscript !== null) {
+                    wscript.SendKeys("{Esc}");
+                }   
+            }
+            this.isFullScreen = false;
         }
     }
 }

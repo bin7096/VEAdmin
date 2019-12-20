@@ -1,39 +1,63 @@
 <template>
-    <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#67C23A">
-        <el-menu-item class="logo">VEAdmin v1.0</el-menu-item>
-        <el-menu-item @click="changeFold()">
-            <i class="el-icon-s-unfold" v-if="isCollapse"></i>
-            <i class="el-icon-s-fold" v-else></i>
-        </el-menu-item>
-        <el-menu-item index="1">处理中心</el-menu-item>
-        <el-submenu index="2">
-            <template slot="title">我的工作台</template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
-            <el-submenu index="2-4">
-                <template slot="title">选项4</template>
-                <el-menu-item index="2-4-1">选项1</el-menu-item>
-                <el-menu-item index="2-4-2">选项2</el-menu-item>
-                <el-menu-item index="2-4-3">选项3</el-menu-item>
+    <div class="navigate-header">
+        <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-left" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
+            <el-menu-item index="1" @click="changeFold()" :title="isCollapse ? '打开侧边栏' : '折叠侧边栏'">
+                <i class="el-icon-s-unfold" v-if="isCollapse"></i>
+                <i class="el-icon-s-fold" v-else></i>
+            </el-menu-item>
+            <el-menu-item index="2" title="前台">
+                <a href="/"><i class="el-icon-view"></i></a>
+            </el-menu-item>
+        </el-menu>
+        <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-right" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
+            <el-submenu index="3" class="user-select">
+                <template slot="title">UserName</template>
+                <el-menu-item index="3-1"><i class="el-icon-user"></i>基本资料</el-menu-item>
+                <el-menu-item index="3-2"><i class="el-icon-edit"></i>修改密码</el-menu-item>
+                <el-menu-item index="3-3"><i class="el-icon-switch-button"></i>退出</el-menu-item>
             </el-submenu>
-        </el-submenu>
-        <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
-    </el-menu>
+            <el-menu-item index="1" v-on:click="closeFull()" title="关闭全屏" v-if="isFull">
+                <i class="layui-icon layui-icon-screen-restore"></i>
+            </el-menu-item>
+            <el-menu-item index="1" v-on:click="fullScreen()" title="全屏显示" v-else>
+                <i class="layui-icon layui-icon-screen-full"></i>
+            </el-menu-item>
+        </el-menu>
+    </div>
 </template>
 <style>
-    .logo{
-        background-color: #67C23A !important;
+    .navigate-header{
+        width: 100%;
+        display: flex;
+        background-color: #545c64;
+    }
+    .navigate-header-right{
+        position: absolute;
+        right: 5px;
+        top: 0;
+    }
+    .navigate-header ul{
+        background-color: rgba(0,0,0,0) !important;
+    }
+    .el-menu.el-menu--horizontal{
+        border: none !important;
+    }
+    .user-select{
+        width: 200px;
+        text-align: center;
+    }
+    .is-active{
+        background-color: #009688 !important;
     }
 </style>
 <script>
 export default {
-    props: ['leftnavfold'],
+    props: ['leftNavFold', 'isFullScreen'],
     data() {
         return {
             activeIndex: '1',
-            isCollapse: this.leftnavfold
+            isCollapse: this.leftNavFold,
+            isFull: this.isFullScreen
         };
     },
     methods: {
@@ -44,11 +68,21 @@ export default {
             this.$emit("foldChanged", !this.isCollapse);
         },
         changeData: function () {
-            this.isCollapse = this.leftnavfold;
+            this.isCollapse = this.leftNavFold;
+            this.isFull = this.isFullScreen;
+        },
+        fullScreen: function () {
+            console.log('fullScreen');
+            this.$parent.requestFullScreen();
+        },
+        closeFull: function () {
+            console.log('closeFull');
+            this.$parent.closeFullScreen();
         }
     },
     watch: {
-        leftnavfold: "changeData"
+        leftNavFold: "changeData",
+        isFullScreen: "changeData"
     }
 }
 </script>
