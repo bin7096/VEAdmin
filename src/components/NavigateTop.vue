@@ -1,7 +1,7 @@
 <template>
     <div class="navigate-header">
         <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-left" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
-            <el-menu-item index="1" @click="changeFold()" :title="isCollapse ? '打开侧边栏' : '折叠侧边栏'">
+            <el-menu-item index="1" @click="$parent.change(!isCollapse)" :title="isCollapse ? '打开侧边栏' : '折叠侧边栏'">
                 <i class="el-icon-s-unfold" v-if="isCollapse"></i>
                 <i class="el-icon-s-fold" v-else></i>
             </el-menu-item>
@@ -16,10 +16,10 @@
                 <el-menu-item index="3-2"><i class="el-icon-edit"></i>修改密码</el-menu-item>
                 <el-menu-item index="3-3"><i class="el-icon-switch-button"></i>退出</el-menu-item>
             </el-submenu>
-            <el-menu-item index="1" v-on:click="closeFull()" title="关闭全屏" v-if="isFull">
+            <el-menu-item index="1" v-on:click="$parent.closeFullScreen();" title="关闭全屏" v-if="isFull">
                 <i class="layui-icon layui-icon-screen-restore"></i>
             </el-menu-item>
-            <el-menu-item index="1" v-on:click="fullScreen()" title="全屏显示" v-else>
+            <el-menu-item index="1" v-on:click="$parent.requestFullScreen();" title="全屏显示" v-else>
                 <i class="layui-icon layui-icon-screen-full"></i>
             </el-menu-item>
         </el-menu>
@@ -52,6 +52,7 @@
 </style>
 <script>
 export default {
+    name: "navigateTop",
     props: ['leftNavFold', 'isFullScreen'],
     data() {
         return {
@@ -64,20 +65,9 @@ export default {
         handleSelect(key, keyPath) {
             console.log(key, keyPath);
         },
-        changeFold: function () {
-            this.$emit("foldChanged", !this.isCollapse);
-        },
         changeData: function () {
             this.isCollapse = this.leftNavFold;
             this.isFull = this.isFullScreen;
-        },
-        fullScreen: function () {
-            console.log('fullScreen');
-            this.$parent.requestFullScreen();
-        },
-        closeFull: function () {
-            console.log('closeFull');
-            this.$parent.closeFullScreen();
         }
     },
     watch: {

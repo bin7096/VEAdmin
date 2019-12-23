@@ -4,47 +4,23 @@
             <i class="el-icon-s-grid"></i>
             <span slot="title">Admin v1.0 beta</span>
         </el-menu-item>
-        <el-submenu index="1">
-            <template slot="title">
-                <i class="el-icon-location"></i>
-                <span slot="title">导航一</span>
-            </template>
-            <el-menu-item-group>
-                <span slot="title">分组一</span>
-                <el-menu-item index="1-1">选项1</el-menu-item>
-                <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-                <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-                <span slot="title">选项4</span>
-                <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-        </el-submenu>
-        <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
-        </el-menu-item>
+        <menuTree v-for="(item, index) in menuList" :key="index" :k="index" :v="item" :isTop="true"></menuTree>
     </el-menu>
 </template>
 <style>
     .el-menu-vertical-demo{
         height: 100%;
         border: none;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
         height: 100%;
+        overflow: hidden;
+        overflow-y: scroll;
     }
+    .el-menu-vertical-demo::-webkit-scrollbar { width: 0 !important }
     .logo{
         background-color: #226A62 !important;
         height: 60px;
@@ -54,11 +30,161 @@
     }
 </style>
 <script>
+    import menuTree from './MenuTree.vue';
     export default {
+        name: 'navigateLeft',
         props: ['leftNavFold'],
+        components: {
+            menuTree: menuTree
+        },
         data() {
             return {
-                isCollapse: this.leftNavFold
+                isCollapse: this.leftNavFold,
+                menuList: [
+                    {
+                        title: '会员管理',
+                        iclass: 'el-icon-s-grid',
+                        location: 'http://www.qq.com',
+                        childs: [
+                            {
+                                title: '会员列表',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '会员删除',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '会员管理',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: [
+                                    {
+                                        title: '会员列表',
+                                        iclass: 'el-icon-s-grid',
+                                        location: 'http://www.qq.com',
+                                        childs: []
+                                    },
+                                    {
+                                        title: '会员删除',
+                                        iclass: 'el-icon-s-grid',
+                                        location: 'http://www.qq.com',
+                                        childs: []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        title: '订单管理',
+                        iclass: 'el-icon-s-grid',
+                        location: 'http://www.qq.com',
+                        childs: [
+                            {
+                                title: '订单列表',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            }
+                        ]
+                    },
+                    {
+                        title: '管理员管理',
+                        iclass: 'el-icon-s-grid',
+                        location: 'http://www.qq.com',
+                        childs: [
+                            {
+                                title: '管理员列表',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '角色管理',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '权限分类',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '权限管理',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            }
+                        ]
+                    },
+                    {
+                        title: '系统统计',
+                        iclass: 'el-icon-s-grid',
+                        location: 'http://www.qq.com',
+                        childs: [
+                            {
+                                title: '折线图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '柱状图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '地图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '饼图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '雷达图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: 'k线图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '热力图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            },
+                            {
+                                title: '仪表图',
+                                iclass: 'el-icon-s-grid',
+                                location: 'http://www.qq.com',
+                                childs: []
+                            }
+                        ]
+                    },
+                    {
+                        title: '测试菜单',
+                        iclass: 'el-icon-s-grid',
+                        location: 'http://www.qq.com',
+                        childs: []
+                    }
+                ]
             };
         },
         created(){
