@@ -1,22 +1,34 @@
 <template>
-    <el-menu default-active="1-4-1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
-        <el-menu-item class="logo">
-            <i class="el-icon-s-grid"></i>
-            <span slot="title">Admin v1.0 beta</span>
-        </el-menu-item>
-        <menuTree v-for="(item, index) in menuList" :key="index" :k="index" :v="item" :isTop="true"></menuTree>
-    </el-menu>
+    <div class="navigate-left-box">
+        <el-menu default-active="1" class="el-menu-vertical-demo menu-left-title" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
+            <el-menu-item class="logo" index="1">
+                <i class="el-icon-s-grid"></i>
+                <span slot="title">VEAdmin v1.0 beta</span>
+            </el-menu-item>
+        </el-menu>
+        <el-menu default-active="1-4-1" class="el-menu-vertical-demo menu-left-bottom" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
+            <menuTree v-for="(item, index) in menuList" :key="index" :k="index" :v="item" :isTop="true"></menuTree>
+        </el-menu>
+    </div>
 </template>
 <style>
-    .el-menu-vertical-demo{
+    .navigate-left-box{
+        width: 100%;
         height: 100%;
+    }
+    .menu-left-title{
+        height: 60px !important;
+    }
+    .menu-left-bottom{
+        height: calc(100% - 60px) !important;
+    }
+    .el-menu-vertical-demo{
         border: none;
         -ms-overflow-style: none;
         overflow: -moz-scrollbars-none;
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;
-        height: 100%;
         overflow: hidden;
         overflow-y: scroll;
     }
