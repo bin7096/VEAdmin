@@ -16,10 +16,10 @@
                 <el-menu-item index="3-2"><i class="el-icon-edit"></i>修改密码</el-menu-item>
                 <el-menu-item index="3-3"><i class="el-icon-switch-button"></i>退出</el-menu-item>
             </el-submenu>
-            <el-menu-item index="1" v-on:click="$parent.closeFullScreen();" title="关闭全屏" v-if="isFull">
+            <el-menu-item index="1" class="is-active" v-on:click="$parent.closeFullScreen();" title="关闭全屏" v-if="isFull">
                 <i class="layui-icon layui-icon-screen-restore"></i>
             </el-menu-item>
-            <el-menu-item index="1" v-on:click="$parent.requestFullScreen();" title="全屏显示" v-else>
+            <el-menu-item index="1" class="is-active" v-on:click="$parent.requestFullScreen();" title="全屏显示" v-else>
                 <i class="layui-icon layui-icon-screen-full"></i>
             </el-menu-item>
         </el-menu>
@@ -56,7 +56,7 @@ export default {
     props: ['leftNavFold', 'isFullScreen'],
     data() {
         return {
-            activeIndex: '1',
+            activeIndex: '0',
             isCollapse: this.leftNavFold,
             isFull: this.isFullScreen
         };

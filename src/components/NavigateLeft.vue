@@ -7,7 +7,7 @@
             </el-menu-item>
         </el-menu>
         <el-menu default-active="1" class="el-menu-vertical-demo menu-left-bottom" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
-            <menuTree v-for="(item, index) in menuList" :key="index" :k="index" :v="item" :isTop="true"></menuTree>
+            <menuTree v-for="(item, index) in menuList" :key="index" :v="item" :isTop="true"></menuTree>
         </el-menu>
     </div>
 </template>
@@ -54,40 +54,40 @@
                 isCollapse: this.leftNavFold,
                 menuList: [
                     {
-                        index: 0,
+                        id: '1',
                         title: '会员管理',
                         iclass: 'el-icon-user-solid',
                         location: 'http://www.qq.com',
                         childs: [
                             {
-                                index: '1-1',
+                                id: '1-1',
                                 title: '会员列表',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '1-2',
+                                id: '1-2',
                                 title: '会员删除',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '1-3',
+                                id: '1-3',
                                 title: '会员管理',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: [
                                     {
-                                        index: '1-3-1',
+                                        id: '1-3-1',
                                         title: '会员列表',
                                         iclass: '',
                                         location: 'http://www.qq.com',
                                         childs: []
                                     },
                                     {
-                                        index: '1-3-2',
+                                        id: '1-3-2',
                                         title: '会员删除',
                                         iclass: '',
                                         location: 'http://www.qq.com',
@@ -98,13 +98,13 @@
                         ]
                     },
                     {
-                        index: '2',
+                        id: '2',
                         title: '订单管理',
                         iclass: 'el-icon-s-order',
                         location: 'http://www.qq.com',
                         childs: [
                             {
-                                index: '2-1',
+                                id: '2-1',
                                 title: '订单列表',
                                 iclass: '',
                                 location: 'http://www.qq.com',
@@ -113,34 +113,34 @@
                         ]
                     },
                     {
-                        index: '3',
+                        id: '3',
                         title: '管理员管理',
                         iclass: 'el-icon-s-custom',
                         location: 'http://www.qq.com',
                         childs: [
                             {
-                                index: '3-1',
+                                id: '3-1',
                                 title: '管理员列表',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '3-2',
+                                id: '3-2',
                                 title: '角色管理',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '3-3',
+                                id: '3-3',
                                 title: '权限分类',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '3-4',
+                                id: '3-4',
                                 title: '权限管理',
                                 iclass: '',
                                 location: 'http://www.qq.com',
@@ -149,62 +149,62 @@
                         ]
                     },
                     {
-                        index: '4',
+                        id: '4',
                         title: '系统统计',
                         iclass: 'el-icon-s-data',
                         location: 'http://www.qq.com',
                         childs: [
                             {
-                                index: '4-1',
+                                id: '4-1',
                                 title: '折线图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-2',
+                                id: '4-2',
                                 title: '柱状图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-3',
+                                id: '4-3',
                                 title: '地图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-4',
+                                id: '4-4',
                                 title: '饼图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-5',
+                                id: '4-5',
                                 title: '雷达图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-6',
+                                id: '4-6',
                                 title: 'k线图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-7',
+                                id: '4-7',
                                 title: '热力图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
                                 childs: []
                             },
                             {
-                                index: '4-8',
+                                id: '4-8',
                                 title: '仪表图',
                                 iclass: '',
                                 location: 'http://www.qq.com',
@@ -213,7 +213,7 @@
                         ]
                     },
                     {
-                        index: '5',
+                        id: '5',
                         title: '测试菜单',
                         iclass: 'el-icon-info',
                         location: 'http://www.qq.com',
