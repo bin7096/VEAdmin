@@ -46,7 +46,7 @@ export default {
     methods: {
         // NavigateTop中修改了侧边栏的折叠状态并抛出状态值，由change方法接收并更新
         change: function (val) {
-            console.log(val);
+            // console.log(val);
             this.leftNavFold = val;
         },
         // NavigateTop中触发的全屏方法

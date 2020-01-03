@@ -1,5 +1,5 @@
 <template>
-    <el-submenu v-if="item.childs.length > 0" index="index">
+    <el-submenu v-if="item.childs.length > 0" :index="index">
         <template slot="title">
             <i :class="item.iclass"></i>
             <span slot="title">{{item.title}}</span>
@@ -24,6 +24,8 @@ export default {
             index: this.k,
             item: this.v
         }
+    },
+    create: function () {
     }
 }
 </script>
