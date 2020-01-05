@@ -5,7 +5,7 @@
         </div>
         <div class="right-box">
             <navigateTop :leftNavFold="leftNavFold" :isFullScreen="isFullScreen" @foldChanged="change"></navigateTop>
-            <div class="iframe-box"></div>
+            <iFrameBox></iFrameBox>
         </div>
     </div>
 </template>
@@ -23,14 +23,11 @@
     .right-box{
         width: calc(100% - 64px);
     }
-    .iframe-box{
-        background-color: #009688;
-        height: calc(100% - 60px);
-    }
 </style>
 <script>
 import navigateTop from '../components/NavigateTop';
 import navigateLeft from '../components/NavigateLeft';
+import iFrameBox from '../components/IFrameBox';
 export default {
     name: 'App',
     data(){
@@ -41,7 +38,8 @@ export default {
     },
     components: {
         navigateTop: navigateTop,
-        navigateLeft: navigateLeft
+        navigateLeft: navigateLeft,
+        iFrameBox: iFrameBox,
     },
     methods: {
         // NavigateTop中修改了侧边栏的折叠状态并抛出状态值，由change方法接收并更新
