@@ -104,6 +104,7 @@
     }
 </style>
 <script>
+    import {down} from '../assets/js/mouse.js';
     export default {
         name: "iFrameBox",
         props: ['iFrameBtnList'],
@@ -111,6 +112,9 @@
             return {
                 btnList: this.iFrameBtnList
             };
-        }
+        },
+        mounted() {
+            document.addEventListener('mousedown', down);
+        },
     }
 </script>
