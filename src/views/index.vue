@@ -5,7 +5,7 @@
         </div>
         <div class="right-box">
             <navigateTop :leftNavFold="leftNavFold" :isFullScreen="isFullScreen" @foldChanged="change"></navigateTop>
-            <iFrameBox></iFrameBox>
+            <iFrameBox :iFrameBtnList="iFrameBtnList"></iFrameBox>
         </div>
     </div>
 </template>
@@ -34,6 +34,43 @@ export default {
         return {
             isFullScreen: false,
             leftNavFold : true,
+            iFrameBtnList: [
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+                {name: '会员列表'},
+            ]
         };
     },
     components: {
@@ -74,6 +111,9 @@ export default {
                 }   
             }
             this.isFullScreen = false;
+        },
+        selectPage: function (index) {
+            console.log(index);
         }
     }
 }
