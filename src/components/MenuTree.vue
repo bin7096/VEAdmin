@@ -23,7 +23,7 @@ export default {
         return {
             item: this.v,
             isTopItem: this.isTop
-        }
+        };
     }
 }
 </script>
