@@ -8,7 +8,7 @@
                 <span class="iframe-btn iframe-left-btn iframe-home-btn">
                     <i class="el-icon-house"></i>
                 </span>
-                <span class="iframe-page-btn-box">
+                <span class="iframe-page-btn-box" id="iframe_page_btn_box">
                     <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in btnList" :key="index" @click="$parent.selectPage(index)">
                         {{item.name}}<i class="el-icon-close"></i>
                     </span>
@@ -74,6 +74,9 @@
         max-width: 100px;
         padding: 0 11px;
     }
+    .iframe-page-btn{
+        width: 100px;
+    }
     .iframe-btn:hover{
         background-color: #F6F6F6;
     }
@@ -89,6 +92,7 @@
     }
     .iframe-page-btn-box .iframe-btn{
         min-width: 80px;
+        /* scroll-margin-right: 0; */
     }
     .el-icon-close{
         font-size: 16px !important;
@@ -104,7 +108,7 @@
     }
 </style>
 <script>
-    import {down} from '../assets/js/mouse.js';
+    import {mouseInit, mouseDown, mouseUp} from '../assets/js/mouse.js';
     export default {
         name: "iFrameBox",
         props: ['iFrameBtnList'],
@@ -114,7 +118,7 @@
             };
         },
         mounted() {
-            document.addEventListener('mousedown', down);
+            mouseInit('iframe_page_btn_box', 100, 'scroll');
         },
     }
 </script>

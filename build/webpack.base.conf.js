@@ -74,6 +74,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: require.resolve('zepto'),
+        loader: 'exports-loader?window.$!script-loader'
       }
     ]
   },

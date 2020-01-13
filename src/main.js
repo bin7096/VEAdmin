@@ -6,6 +6,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import App from './App';
 import router from './router';
+import $ from 'zepto';
 
 // 引入ElementUI
 import ElementUI from 'element-ui';
