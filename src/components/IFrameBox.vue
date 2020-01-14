@@ -49,6 +49,13 @@
         height: 38px;
         background-color: #FFF;
     }
+    .iframe-title *{
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+    }
     .iframe-title-left, .iframe-page-btn-box{
         float: left;
         display: flex;
@@ -92,7 +99,6 @@
     }
     .iframe-page-btn-box .iframe-btn{
         min-width: 80px;
-        /* scroll-margin-right: 0; */
     }
     .el-icon-close{
         font-size: 16px !important;
@@ -108,7 +114,7 @@
     }
 </style>
 <script>
-    import {mouseInit, mouseDown, mouseUp} from '../assets/js/mouse.js';
+    import {mouseInit, mouseDown, mouseUp} from '../assets/js/linearDrag.js';
     export default {
         name: "iFrameBox",
         props: ['iFrameBtnList'],
@@ -118,7 +124,8 @@
             };
         },
         mounted() {
-            mouseInit('iframe_page_btn_box', 100, 'scroll');
+            let allWidth = this.btnList.length * 100;
+            mouseInit('iframe_page_btn_box', 100, 'scroll', 5, 'X', allWidth);
         },
     }
 </script>

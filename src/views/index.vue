@@ -21,7 +21,8 @@
         height: 100%;
     }
     .right-box{
-        width: calc(100% - 64px);
+        min-width: calc(100% - 200px);
+        max-width: calc(100% - 64px);
     }
 </style>
 <script>
@@ -35,21 +36,6 @@ export default {
             isFullScreen: false,
             leftNavFold : true,
             iFrameBtnList: [
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
-                {name: '会员列表'},
                 {name: '会员列表'},
                 {name: '会员列表'},
                 {name: '会员列表'},
