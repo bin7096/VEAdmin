@@ -125,7 +125,7 @@
         },
         mounted() {
             let allWidth = this.btnList.length * 100;
-            mouseInit('iframe_page_btn_box', 100, 'scroll', 5, 'X', allWidth);
+            mouseInit('iframe_page_btn_box', 100, 'X', allWidth);
         },
     }
 </script>
