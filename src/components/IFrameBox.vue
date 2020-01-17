@@ -2,7 +2,7 @@
     <div class="iframe-box">
         <div class="iframe-title">
             <div class="iframe-title-left">
-                <span class="iframe-btn iframe-left-btn iframe-direction-btn">
+                <span class="iframe-btn iframe-left-btn iframe-direction-btn" @click="prev('iframe_page_btn_box')">
                     <i class="el-icon-d-arrow-left"></i>
                 </span>
                 <span class="iframe-btn iframe-left-btn iframe-home-btn">
@@ -27,7 +27,7 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
-                <span class="iframe-btn iframe-right-btn iframe-home-btn">
+                <span class="iframe-btn iframe-right-btn iframe-home-btn" @click="next('iframe_page_btn_box')">
                     <i class="el-icon-d-arrow-right"></i>
                 </span>
             </div>
@@ -82,7 +82,7 @@
         padding: 0 11px;
     }
     .iframe-page-btn{
-        width: 100px;
+        width: 102px;
     }
     .iframe-btn:hover{
         background-color: #F6F6F6;
@@ -114,7 +114,7 @@
     }
 </style>
 <script>
-    import {mouseInit, mouseDown, mouseUp} from '../assets/js/linearDrag.js';
+    import {mouseInit, mouseDown, mouseUp, prev, next, resize as scrollResize} from '../assets/js/linearDrag.js';
     export default {
         name: "iFrameBox",
         props: ['iFrameBtnList'],
@@ -124,8 +124,13 @@
             };
         },
         mounted() {
-            let allWidth = this.btnList.length * 100;
-            mouseInit('iframe_page_btn_box', 100, 'X', allWidth);
+            let allWidth = this.btnList.length * 102;
+            mouseInit('iframe_page_btn_box', 102, 'X', allWidth);
+        },
+        methods: {
+            prev: prev,
+            next: next
         },
     }
+    window.scrollResize = scrollResize;
 </script>
