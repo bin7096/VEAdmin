@@ -72,7 +72,7 @@ export default {
     },
     watch: {
         leftNavFold: "changeData",
-        isFullScreen: "changeData"
+        isFullScreen: "changeData",
     }
 }
 </script>

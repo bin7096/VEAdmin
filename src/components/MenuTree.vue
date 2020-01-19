@@ -22,7 +22,7 @@ export default {
     data (){
         return {
             item: this.v,
-            isTopItem: this.isTop
+            isTopItem: this.isTop,
         };
     }
 }
