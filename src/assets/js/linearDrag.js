@@ -20,9 +20,9 @@ let isDown = false;
  * @params scrollId  String 滚动元素的class
  * @params disNum    Number 每次移动的数值，非拖动
  * @params direction String 滚动方向（X/Y）
- * @params allLength Number 滚动元素的子节点总长度
+ * @params num       Number 滚动元素的子节点数量
 */
-export let mouseInit = function (scrollId, disNum, direction, allLength) {
+export let mouseInit = function (scrollId, disNum, direction, num) {
     scrollInfo[scrollId] = {
         // 滚动的节点
         scrollObj   : document.getElementById(scrollId),
@@ -33,9 +33,9 @@ export let mouseInit = function (scrollId, disNum, direction, allLength) {
         // 可滚动距离
         scrollable  : 0,
         // 子节点总长度
-        childLength : Number(allLength),
+        childLength : Math.abs(Number(num) * Number(disNum)),
         // 单个子节点长度
-        aLength     : Number(disNum),
+        aLength     : Math.abs(Number(disNum)),
         // 已经滚动过的距离
         scrolled    : 0,
         // 按下鼠标时的位置（event的clientX或clientY属性）
@@ -55,6 +55,10 @@ export let mouseInit = function (scrollId, disNum, direction, allLength) {
             length = $(scrollInfo[scrollId].scrollObj).width();
         }
         scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
+        console.log('scrollObj:', scrollInfo[scrollId].scrollObj);
+        console.log('childLength:', scrollInfo[scrollId].childLength);
+        console.log('length:', length);
+        console.log('scrollable:', scrollInfo[scrollId].scrollable);
         // 监听鼠标按下
         scrollInfo[scrollId].scrollObj.addEventListener('mousedown', mouseDown, false);
         // 监听鼠标移动
@@ -121,13 +125,10 @@ let mouseMove = function (event) {
     let id = $(this).attr('id');
     let obj = scrollInfo[id];
     if (!obj.isDown) {return;}
-    console.log('pName:', obj.pName);
-    console.log('position:', obj.position);
     let l = event[obj.pName] - obj.position;
     l = 0 - l;
     if (Math.abs(l) > obj.scrollable || l < 0) {return;}
     obj.scrolled = l;
-    console.log('scrolled:', obj.scrolled)
     // 滚动距离，JQ的scrollLeft和scrollTop参数需要总的值
     if (obj.scrollTo === 'Y') {
         // 纵向滚动
@@ -166,4 +167,31 @@ export let resize = function (event) {
     }
 }
 
-// 问题：同个页面不可以有两个拖动节点使用同一个插件
+// 子元素数量发生变化时调用
+export let changeLength = function (scrollId, num) {
+    if (!scrollInfo.hasOwnProperty(scrollId)) {return;}
+    scrollInfo[scrollId].childLength = Math.abs(Number(num) * scrollInfo[scrollId].aLength);
+    console.log('childLength:', scrollInfo[scrollId].childLength);
+    // 元素的可滚动距离
+    let length = 0;
+    if (scrollTo === 'Y') {
+        // 纵向滚动，获取元素高度
+        length = $(scrollInfo[scrollId].scrollObj).height();
+    }else{
+        // 横向滚动，获取元素的宽度
+        length = $(scrollInfo[scrollId].scrollObj).width();
+    }
+    scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
+    if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
+        if (scrollInfo[scrollId].scrollTo === 'Y') {
+            // 纵向滚动
+            $(scrollInfo[scrollId].scrollObj).scrollTop(scrollInfo[scrollId].scrollable);
+        }else{
+            // 横向滚动
+            $(scrollInfo[scrollId].scrollObj).scrollLeft(scrollInfo[scrollId].scrollable);
+        }
+        scrollInfo[scrollId].scrolled = scrollInfo[scrollId].scrollable;
+    }
+    console.log('scrollable:', scrollInfo[scrollId].scrollable);
+    console.log('scrolled:', scrollInfo[scrollId].scrolled);
+}

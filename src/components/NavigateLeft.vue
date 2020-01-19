@@ -26,6 +26,7 @@
         border: none;
         -ms-overflow-style: none;
         overflow: -moz-scrollbars-none;
+        scrollbar-width: none;
     }
     .el-menu-vertical-demo:not(.el-menu--collapse) {
         width: 200px;

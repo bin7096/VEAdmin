@@ -10,7 +10,7 @@
                 </span>
                 <span class="iframe-page-btn-box" id="iframe_page_btn_box">
                     <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in btnList" :key="index" @click="$parent.selectPage(index)">
-                        {{item.name}}<i class="el-icon-close"></i>
+                        {{item.name}}<i class="el-icon-close iframe-close-btn" @click.stop="closePage(index)"></i>
                     </span>
                 </span>
             </div>
@@ -21,9 +21,9 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item class="iframe-close-btn">关闭当前标签页</el-dropdown-item>
-                            <el-dropdown-item class="iframe-close-btn">关闭其他标签页</el-dropdown-item>
-                            <el-dropdown-item class="iframe-close-btn">关闭所有标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right">关闭当前标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right">关闭其他标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right">关闭所有标签页</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
@@ -65,6 +65,10 @@
     }
     .iframe-page-btn-box{
         overflow-x: auto;
+        border: none;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+        scrollbar-width: none;
     }
     .iframe-page-btn-box::-webkit-scrollbar {
         width: 0 !important;
@@ -80,9 +84,6 @@
         line-height: 38px;
         max-width: 100px;
         padding: 0 11px;
-    }
-    .iframe-page-btn{
-        width: 102px;
     }
     .iframe-btn:hover{
         background-color: #F6F6F6;
@@ -100,13 +101,20 @@
     .iframe-page-btn-box .iframe-btn{
         min-width: 80px;
     }
-    .el-icon-close{
-        font-size: 16px !important;
-        position: relative;
-        top: -1px;
-        left: 5px;
+    .iframe-page-btn{
+        width: 108px;
+        min-width: 108px !important;
     }
-    .iframe-close-btn:hover{
+    .iframe-close-btn{
+        font-size: 16px !important;
+        float: right;
+        position: relative;
+        top: 11px;
+    }
+    .iframe-close-btn-right{
+        font-size: 14px !important;
+    }
+    .iframe-close-btn:hover, .iframe-close-btn-right:hover{
         color: #009688 !important;
     }
     .iframe-title-end{
@@ -114,7 +122,7 @@
     }
 </style>
 <script>
-    import {mouseInit, mouseDown, mouseUp, prev, next, resize as scrollResize} from '../assets/js/linearDrag.js';
+    import {mouseInit, prev, next, resize as scrollResize, changeLength} from '../assets/js/linearDrag.js';
     export default {
         name: "iFrameBox",
         props: ['iFrameBtnList'],
@@ -124,13 +132,20 @@
             };
         },
         mounted() {
-            let allWidth = this.btnList.length * 102;
-            mouseInit('iframe_page_btn_box', 102, 'X', allWidth);
+            mouseInit('iframe_page_btn_box', 130, 'X', this.btnList.length);
         },
         methods: {
             prev: prev,
-            next: next
+            next: next,
+            closePage: function (index) {
+                console.log(index);
+                this.iFrameBtnList.splice(index, 1);
+                console.log(this.iFrameBtnList);
+                this.$parent.selectPage(index);
+                changeLength('iframe_page_btn_box', this.btnList.length);
+            }
         },
     }
     window.scrollResize = scrollResize;
+    window.changeLength = changeLength;
 </script>

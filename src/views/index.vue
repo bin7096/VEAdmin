@@ -7,6 +7,18 @@
             <navigateTop :leftNavFold="leftNavFold" :isFullScreen="isFullScreen" @foldChanged="change"></navigateTop>
             <iFrameBox :iFrameBtnList="iFrameBtnList"></iFrameBox>
         </div>
+        <div class="float-box">
+            <el-dropdown>
+                <span class="el-dropdown-link">
+                    <i class="el-icon-user"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item><i class="el-icon-user"></i>基本资料</el-dropdown-item>
+                    <el-dropdown-item><i class="el-icon-edit"></i>修改密码</el-dropdown-item>
+                    <el-dropdown-item><i class="el-icon-switch-button"></i>退出</el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
     </div>
 </template>
 <style>
@@ -23,6 +35,29 @@
     .right-box{
         min-width: calc(100% - 200px);
         max-width: calc(100% - 64px);
+    }
+    .float-box{
+        display: none;
+        background-color: #FFF;
+        position: fixed;
+        right: 30px;
+        bottom: 45px;
+        width: 65px;
+        height: 65px;
+        text-align: center;
+        line-height: 65px;
+        border-radius: 65px;
+    }
+    .float-box .el-dropdown-link{
+        font-size: 30px;
+    }
+    @media only screen and (max-width:599px), only screen and (max-device-width:599px){
+        .user-select{
+            display: none;
+        }
+        .float-box{
+            display: inline-block;
+        }
     }
 </style>
 <script>
@@ -99,7 +134,7 @@ export default {
             this.isFullScreen = false;
         },
         selectPage: function (index) {
-            console.log(index);
+            console.log('parent:', this.iFrameBtnList);
         }
     }
 }
