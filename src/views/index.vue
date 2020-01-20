@@ -35,6 +35,7 @@
     .right-box{
         min-width: calc(100% - 200px);
         max-width: calc(100% - 64px);
+        width: calc(100% - 64px);
     }
     .float-box{
         display: none;
@@ -135,6 +136,9 @@ export default {
         },
         selectPage: function (index) {
             console.log('parent:', this.iFrameBtnList);
+        },
+        openPage: function (src) {
+            console.log('src:', src);
         }
     }
 }

@@ -15,7 +15,7 @@
                 </span>
             </div>
             <div class="iframe-title-right">
-                <span class="iframe-btn iframe-right-btn iframe-home-btn">
+                <span class="iframe-btn iframe-right-btn">
                     <el-dropdown>
                         <span class="el-dropdown-link">
                             <i class="el-icon-arrow-down el-icon--right"></i>
@@ -27,11 +27,17 @@
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
-                <span class="iframe-btn iframe-right-btn iframe-home-btn" @click="next('iframe_page_btn_box')">
+                <span class="iframe-btn iframe-right-btn" @click="next('iframe_page_btn_box')">
                     <i class="el-icon-d-arrow-right"></i>
+                </span>
+                <span class="iframe-btn iframe-right-btn">
+                    <i class="el-icon-refresh"></i>
                 </span>
             </div>
             <span class="iframe-title-end"></span>
+        </div>
+        <div class="iframe-body">
+            <iframe src="https://xadmin.binid.cn" frameborder="0"></iframe>
         </div>
     </div>
 </template>
@@ -61,9 +67,10 @@
         display: flex;
         flex-direction: row;
         overflow: hidden;
-        width: calc(100% - 84px);
+        width: calc(100% - 126px);
     }
     .iframe-page-btn-box{
+        width: calc(100% - 84px);
         overflow-x: auto;
         border: none;
         -ms-overflow-style: none;
@@ -72,6 +79,7 @@
     }
     .iframe-page-btn-box::-webkit-scrollbar {
         width: 0 !important;
+        height: 0 !important;
     }
     .iframe-title-right{
         float: right;
@@ -119,6 +127,15 @@
     }
     .iframe-title-end{
         clear: both;
+    }
+    .iframe-body{
+        width: 100%;
+        height: calc(100% - 38px);
+    }
+    .iframe-body iframe{
+        width: 100%;
+        height: 100%;
+        background-color: #FFF;
     }
 </style>
 <script>
