@@ -9,8 +9,8 @@
                     <i class="el-icon-house"></i>
                 </span>
                 <span class="iframe-page-btn-box" id="iframe_page_btn_box">
-                    <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in btnList" :key="index" @click="$parent.selectPage(index)">
-                        {{item.name}}<i class="el-icon-close iframe-close-btn" @click.stop="closePage(index)"></i>
+                    <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in getIFrameList" :key="index">
+                        {{item.title}}<i class="el-icon-close iframe-close-btn" @click.stop="closeIFrame(index)"></i>
                     </span>
                 </span>
             </div>
@@ -37,7 +37,7 @@
             <span class="iframe-title-end"></span>
         </div>
         <div class="iframe-body">
-            <iframe src="https://xadmin.binid.cn" frameborder="0"></iframe>
+            <iframe v-for="(item, index) in getIFrameList" :key="index" :src="item.src" frameborder="0" :class="$store.state.index.activeIFrameIndex === index ? '' : 'iframe-hidden'"></iframe>
         </div>
     </div>
 </template>
@@ -137,32 +137,34 @@
         height: 100%;
         background-color: #FFF;
     }
+    .iframe-body .iframe-hidden{
+        display: none;
+    }
 </style>
 <script>
     import {mouseInit, prev, next, resize as scrollResize, changeLength} from '../assets/js/linearDrag.js';
     export default {
         name: "iFrameBox",
-        props: ['iFrameBtnList'],
-        data() {
-            return {
-                btnList: this.iFrameBtnList
-            };
-        },
         mounted() {
-            mouseInit('iframe_page_btn_box', 130, 'X', this.btnList.length);
+            mouseInit('iframe_page_btn_box', 130, 'X', this.$store.state.index.iFrameList.length);
+        },
+        computed: {
+            getIFrameList(){
+                changeLength('iframe_page_btn_box', this.$store.state.index.iFrameList.length);
+                return this.$store.state.index.iFrameList;
+            }
         },
         methods: {
             prev: prev,
             next: next,
-            closePage: function (index) {
-                console.log(index);
-                this.iFrameBtnList.splice(index, 1);
-                console.log(this.iFrameBtnList);
-                this.$parent.selectPage(index);
-                changeLength('iframe_page_btn_box', this.btnList.length);
+            closeIFrame: function (index) {
+                this.$store.dispatch('index/rmIFrame', index);
+                // console.log(index);
+                // this.iFrameBtnList.splice(index, 1);
+                // console.log(this.iFrameBtnList);
+                // this.$parent.selectPage(index);
+                // changeLength('iframe_page_btn_box', this.btnList.length);
             }
         },
     }
-    window.scrollResize = scrollResize;
-    window.changeLength = changeLength;
 </script>

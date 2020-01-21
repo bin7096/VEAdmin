@@ -1,12 +1,12 @@
 <template>
     <div class="navigate-left-box">
-        <el-menu default-active="1" class="el-menu-vertical-demo menu-left-title" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse">
+        <el-menu default-active="1" class="el-menu-vertical-demo menu-left-title" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="$store.state.index.leftNavFold">
             <el-menu-item class="logo" index="1">
                 <i class="el-icon-s-platform"></i>
                 <span slot="title">VEAdmin v1.0 beta</span>
             </el-menu-item>
         </el-menu>
-        <el-menu default-active="1" class="el-menu-vertical-demo menu-left-bottom" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="isCollapse"  v-on:openIFrame="$parent.openPage">
+        <el-menu default-active="1" class="el-menu-vertical-demo menu-left-bottom" @open="handleOpen" @close="handleClose" background-color="#545c64" text-color="#fff" active-text-color="#fff" :collapse="$store.state.index.leftNavFold">
             <menuTree v-for="(item, index) in menuList" :key="index" :v="item" :isTop="true"></menuTree>
         </el-menu>
     </div>
@@ -46,13 +46,11 @@
     import menuTree from './MenuTree.vue';
     export default {
         name: 'navigateLeft',
-        props: ['leftNavFold'],
         components: {
             menuTree: menuTree
         },
         data() {
             return {
-                isCollapse: this.leftNavFold,
                 menuList: [
                     {
                         id: '1',
@@ -232,16 +230,7 @@
             },
             handleClose(key, keyPath) {
                 // console.log(key, keyPath);
-            },
-            changeData: function () {
-                this.isCollapse = this.leftNavFold
-            },
-            openIFrame: function (src) {
-                console.log('src:', src);
             }
-        },
-        watch: {
-            leftNavFold: "changeData"
         }
     }
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="navigate-header">
         <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-left" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
-            <el-menu-item index="1" @click="$parent.change(!isCollapse)" :title="isCollapse ? '打开侧边栏' : '折叠侧边栏'">
-                <i class="el-icon-s-unfold" v-if="isCollapse"></i>
+            <el-menu-item index="1" @click="$store.dispatch('index/changeLeftFold')" :title="getLeftFoldStatus ? '打开侧边栏' : '折叠侧边栏'">
+                <i class="el-icon-s-unfold" v-if="getLeftFoldStatus"></i>
                 <i class="el-icon-s-fold" v-else></i>
             </el-menu-item>
             <el-menu-item index="2" title="前台">
@@ -16,7 +16,7 @@
                 <el-menu-item index="3-2"><i class="el-icon-edit"></i>修改密码</el-menu-item>
                 <el-menu-item index="3-3"><i class="el-icon-switch-button"></i>退出</el-menu-item>
             </el-submenu>
-            <el-menu-item index="1" class="is-active" @click="$parent.closeFullScreen();" title="关闭全屏" v-if="isFull">
+            <el-menu-item index="1" class="is-active" @click="$parent.closeFullScreen();" title="关闭全屏" v-if="getFullScreenStatus">
                 <i class="layui-icon layui-icon-screen-restore"></i>
             </el-menu-item>
             <el-menu-item index="1" class="is-active" @click="$parent.requestFullScreen();" title="全屏显示" v-else>
@@ -53,26 +53,23 @@
 <script>
 export default {
     name: "navigateTop",
-    props: ['leftNavFold', 'isFullScreen'],
     data() {
         return {
             activeIndex: '0',
-            isCollapse: this.leftNavFold,
-            isFull: this.isFullScreen
         };
+    },
+    computed: {
+        getFullScreenStatus: function () {
+            return this.$store.state.index.isFullScreen;
+        },
+        getLeftFoldStatus: function () {
+            return this.$store.state.index.leftNavFold;
+        }
     },
     methods: {
         handleSelect(key, keyPath) {
             // console.log(key, keyPath);
-        },
-        changeData: function () {
-            this.isCollapse = this.leftNavFold;
-            this.isFull = this.isFullScreen;
         }
-    },
-    watch: {
-        leftNavFold: "changeData",
-        isFullScreen: "changeData",
     }
 }
 </script>

@@ -1,11 +1,11 @@
 <template class="box">
     <div class="box">
         <div class="left-box">
-            <navigateLeft :leftNavFold="leftNavFold" class="navigate-left"></navigateLeft>
+            <navigateLeft class="navigate-left"></navigateLeft>
         </div>
         <div class="right-box">
-            <navigateTop :leftNavFold="leftNavFold" :isFullScreen="isFullScreen" @foldChanged="change"></navigateTop>
-            <iFrameBox :iFrameBtnList="iFrameBtnList"></iFrameBox>
+            <navigateTop></navigateTop>
+            <iFrameBox></iFrameBox>
         </div>
         <div class="float-box">
             <el-dropdown>
@@ -48,6 +48,8 @@
         text-align: center;
         line-height: 65px;
         border-radius: 65px;
+        border: 1px solid #ccc;
+        box-shadow: 1px 1px 5px 1px #ccc;
     }
     .float-box .el-dropdown-link{
         font-size: 30px;
@@ -67,34 +69,6 @@ import navigateLeft from '../components/NavigateLeft';
 import iFrameBox from '../components/IFrameBox';
 export default {
     name: 'App',
-    data(){
-        return {
-            isFullScreen: false,
-            leftNavFold : true,
-            iFrameBtnList: [
-                {name: '会员列表1'},
-                {name: '会员列表2'},
-                {name: '会员列表3'},
-                {name: '会员列表4'},
-                {name: '会员列表5'},
-                {name: '会员列表6'},
-                {name: '会员列表7'},
-                {name: '会员列表8'},
-                {name: '会员列表9'},
-                {name: '会员列表10'},
-                {name: '会员列表11'},
-                {name: '会员列表12'},
-                {name: '会员列表13'},
-                {name: '会员列表14'},
-                {name: '会员列表15'},
-                {name: '会员列表16'},
-                {name: '会员列表17'},
-                {name: '会员列表18'},
-                {name: '会员列表19'},
-                {name: '会员列表20'},
-            ]
-        };
-    },
     components: {
         navigateTop: navigateTop,
         navigateLeft: navigateLeft,
@@ -119,7 +93,7 @@ export default {
                     wscript.SendKeys("{F11}");
                 }   
             }
-            this.isFullScreen = true;
+            this.$store.dispatch('index/changeFullScreen');
         },
         // NavigateTop中触发的关闭全屏方法
         closeFullScreen: function () {
@@ -132,7 +106,7 @@ export default {
                     wscript.SendKeys("{Esc}");
                 }   
             }
-            this.isFullScreen = false;
+            this.$store.dispatch('index/changeFullScreen');
         },
         selectPage: function (index) {
             console.log('parent:', this.iFrameBtnList);
