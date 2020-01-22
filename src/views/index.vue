@@ -93,7 +93,7 @@ export default {
                     wscript.SendKeys("{F11}");
                 }   
             }
-            this.$store.dispatch('index/changeFullScreen');
+            this.$store.commit('index/fullScreenStatus');
         },
         // NavigateTop中触发的关闭全屏方法
         closeFullScreen: function () {
@@ -106,7 +106,7 @@ export default {
                     wscript.SendKeys("{Esc}");
                 }   
             }
-            this.$store.dispatch('index/changeFullScreen');
+            this.$store.commit('index/fullScreenStatus');
         },
         selectPage: function (index) {
             console.log('parent:', this.iFrameBtnList);

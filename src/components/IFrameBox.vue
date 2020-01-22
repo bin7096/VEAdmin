@@ -5,12 +5,12 @@
                 <span class="iframe-btn iframe-left-btn iframe-direction-btn" @click="prev('iframe_page_btn_box')">
                     <i class="el-icon-d-arrow-left"></i>
                 </span>
-                <span class="iframe-btn iframe-left-btn iframe-home-btn">
+                <span class="iframe-btn iframe-left-btn iframe-home-btn" :class="getIFrameIndex === 0 ? 'iframe-btn-active' : ''" @click="$store.dispatch('index/selectIFrame', 0)">
                     <i class="el-icon-house"></i>
                 </span>
                 <span class="iframe-page-btn-box" id="iframe_page_btn_box">
-                    <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in getIFrameList" :key="index">
-                        {{item.title}}<i class="el-icon-close iframe-close-btn" @click.stop="closeIFrame(index)"></i>
+                    <span class="iframe-btn iframe-left-btn iframe-page-btn" v-for="(item, index) in getIFrameList" :key="index" :class="[index === 0 ? 'iframe-btn-hidden' : '', getIFrameIndex === index ? 'iframe-btn-active' : '']" @click="$store.dispatch('index/selectIFrame', index)">
+                        {{item.title}}<i class="el-icon-close iframe-close-btn" @click.stop="$store.dispatch('index/rmIFrame', index)"></i>
                     </span>
                 </span>
             </div>
@@ -21,23 +21,23 @@
                             <i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item class="iframe-close-btn-right">关闭当前标签页</el-dropdown-item>
-                            <el-dropdown-item class="iframe-close-btn-right">关闭其他标签页</el-dropdown-item>
-                            <el-dropdown-item class="iframe-close-btn-right">关闭所有标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right" @click.native="$store.commit('index/closeNowIFrame')">关闭当前标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right" @click.native="$store.commit('index/closeOtherIFrame')">关闭其他标签页</el-dropdown-item>
+                            <el-dropdown-item class="iframe-close-btn-right" @click.native="$store.commit('index/closeAllIFrame')">关闭所有标签页</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </span>
                 <span class="iframe-btn iframe-right-btn" @click="next('iframe_page_btn_box')">
                     <i class="el-icon-d-arrow-right"></i>
                 </span>
-                <span class="iframe-btn iframe-right-btn">
+                <span class="iframe-btn iframe-right-btn" @click="iFrameReload()">
                     <i class="el-icon-refresh"></i>
                 </span>
             </div>
             <span class="iframe-title-end"></span>
         </div>
         <div class="iframe-body">
-            <iframe v-for="(item, index) in getIFrameList" :key="index" :src="item.src" frameborder="0" :class="$store.state.index.activeIFrameIndex === index ? '' : 'iframe-hidden'"></iframe>
+            <iframe class="iframe-item" v-for="(item, index) in getIFrameList" :id="item.id" :key="index" :src="item.src" frameborder="0" :class="getIFrameIndex === index ? '' : 'iframe-hidden'"></iframe>
         </div>
     </div>
 </template>
@@ -96,6 +96,13 @@
     .iframe-btn:hover{
         background-color: #F6F6F6;
     }
+    .iframe-btn-active, .iframe-btn-active:hover{
+        background-color: #009688;
+        color: #FFFFFF;
+    }
+    .iframe-btn-hidden{
+        display: none;
+    }
     .iframe-btn *{
         display: inline-block;
     }
@@ -105,6 +112,9 @@
     }
     .iframe-btn i:hover{
         color: #009688;
+    }
+    .iframe-btn-active i:hover{
+        color: #FFFFFF;
     }
     .iframe-page-btn-box .iframe-btn{
         min-width: 80px;
@@ -146,24 +156,28 @@
     export default {
         name: "iFrameBox",
         mounted() {
-            mouseInit('iframe_page_btn_box', 130, 'X', this.$store.state.index.iFrameList.length);
+            mouseInit('iframe_page_btn_box', 130, 'X', this.$store.state.index.iFrameList.length - 1);
         },
         computed: {
+            getIFrameIndex(){
+                return this.$store.state.index.activeIFrameIndex;
+            },
             getIFrameList(){
-                changeLength('iframe_page_btn_box', this.$store.state.index.iFrameList.length);
                 return this.$store.state.index.iFrameList;
             }
         },
+        updated() {
+            // getIFrameList渲染完成再更新标签滚动位置
+            this.$nextTick(function(){
+                changeLength('iframe_page_btn_box', this.$store.state.index.iFrameList.length - 1);
+            });
+        },
         methods: {
-            prev: prev,
-            next: next,
-            closeIFrame: function (index) {
-                this.$store.dispatch('index/rmIFrame', index);
-                // console.log(index);
-                // this.iFrameBtnList.splice(index, 1);
-                // console.log(this.iFrameBtnList);
-                // this.$parent.selectPage(index);
-                // changeLength('iframe_page_btn_box', this.btnList.length);
+            prev,
+            next,
+            iFrameReload(){
+                let index = this.$store.state.index.activeIFrameIndex;
+                $('.iframe-item').eq(index)[0].contentWindow.reload();
             }
         },
     }

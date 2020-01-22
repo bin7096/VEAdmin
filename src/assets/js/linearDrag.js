@@ -181,8 +181,10 @@ export let changeLength = function (scrollId, num) {
         // 横向滚动，获取元素的宽度
         length = $(scrollInfo[scrollId].scrollObj).width();
     }
+    console.log('length:', length);
     scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
-    if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
+    // if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
+    //     // 减少时
         if (scrollInfo[scrollId].scrollTo === 'Y') {
             // 纵向滚动
             $(scrollInfo[scrollId].scrollObj).scrollTop(scrollInfo[scrollId].scrollable);
@@ -191,7 +193,7 @@ export let changeLength = function (scrollId, num) {
             $(scrollInfo[scrollId].scrollObj).scrollLeft(scrollInfo[scrollId].scrollable);
         }
         scrollInfo[scrollId].scrolled = scrollInfo[scrollId].scrollable;
-    }
+    // }
     console.log('scrollable:', scrollInfo[scrollId].scrollable);
     console.log('scrolled:', scrollInfo[scrollId].scrolled);
 }

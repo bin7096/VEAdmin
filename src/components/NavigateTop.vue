@@ -1,7 +1,7 @@
 <template>
     <div class="navigate-header">
         <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-left" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
-            <el-menu-item index="1" @click="$store.dispatch('index/changeLeftFold')" :title="getLeftFoldStatus ? '打开侧边栏' : '折叠侧边栏'">
+            <el-menu-item index="1" @click="$store.commit('index/leftFoldStatus')" :title="getLeftFoldStatus ? '打开侧边栏' : '折叠侧边栏'">
                 <i class="el-icon-s-unfold" v-if="getLeftFoldStatus"></i>
                 <i class="el-icon-s-fold" v-else></i>
             </el-menu-item>
@@ -59,15 +59,15 @@ export default {
         };
     },
     computed: {
-        getFullScreenStatus: function () {
+        getFullScreenStatus(){
             return this.$store.state.index.isFullScreen;
         },
-        getLeftFoldStatus: function () {
+        getLeftFoldStatus(){
             return this.$store.state.index.leftNavFold;
         }
     },
     methods: {
-        handleSelect(key, keyPath) {
+        handleSelect(key, keyPath){
             // console.log(key, keyPath);
         }
     }
