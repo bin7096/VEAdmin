@@ -4,14 +4,14 @@ import './assets/css/layui.css';
 
 import Vue from 'vue';
 import App from './App';
-import router from './router';
-import store from './store/main';
-import $ from 'zepto';
-
 // 引入ElementUI
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+
+import router from './router';
+import store from './store/main';
+import $ from 'zepto';
 
 Vue.config.productionTip = false;
 

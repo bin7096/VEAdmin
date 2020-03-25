@@ -14,7 +14,9 @@
     "core-js": "^2.6.11",
     "echarts": "^4.7.0",
     "element-ui": "^2.13.0",
+    "happypack": "^5.0.1",
     "layui-src": "^2.5.5",
+    "strip-ansi": "^6.0.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "webpack-parallel-uglify-plugin": "^1.1.2"
