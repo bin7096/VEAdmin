@@ -35,11 +35,7 @@
     }
     .el-menu-vertical-demo::-webkit-scrollbar { width: 0 !important }
     .logo{
-        background-color: #226A62 !important;
         height: 60px;
-    }
-    .is-active{
-        background-color: #009688 !important;
     }
 </style>
 <script>

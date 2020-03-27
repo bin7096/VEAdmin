@@ -1,5 +1,5 @@
 <template class="box">
-    <div class="box">
+    <div class="box" :style="{'--color' : getThemeStyle}">
         <div class="left-box">
             <navigateLeft class="navigate-left"></navigateLeft>
         </div>
@@ -62,17 +62,27 @@
             display: inline-block;
         }
     }
+    /* 主题颜色-嵌入js变量 */
+    .is-active{
+        background-color: var(--color) !important;
+    }
 </style>
 <script>
-import navigateTop from '../components/NavigateTop';
-import navigateLeft from '../components/NavigateLeft';
-import iFrameBox from '../components/IFrameBox';
+import navigateTop from '../components/main/NavigateTop';
+import navigateLeft from '../components/main/NavigateLeft';
+import iFrameBox from '../components/main/IFrameBox';
 export default {
     name: 'App',
     components: {
         navigateTop: navigateTop,
         navigateLeft: navigateLeft,
-        iFrameBox: iFrameBox,
+        iFrameBox: iFrameBox
+    },
+    computed: {
+        // 获取主题颜色
+        getThemeStyle() {
+            return this.$store.state.index.styleColor;
+        },
     },
     methods: {
         // NavigateTop中修改了侧边栏的折叠状态并抛出状态值，由change方法接收并更新

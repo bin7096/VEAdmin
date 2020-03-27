@@ -1,5 +1,5 @@
 <template>
-    <div class="navigate-header">
+    <div class="navigate-header" :style="{'--color' : getThemeStyle}">
         <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-left" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
             <el-menu-item index="1" @click="$store.commit('index/leftFoldStatus')" :title="getLeftFoldStatus ? '打开侧边栏' : '折叠侧边栏'">
                 <i class="el-icon-s-unfold" v-if="getLeftFoldStatus"></i>
@@ -7,6 +7,9 @@
             </el-menu-item>
             <el-menu-item index="2" title="前台">
                 <a href="/"><i class="el-icon-view"></i></a>
+            </el-menu-item>
+            <el-menu-item index="3" title="颜色">
+                <i class="layui-icon layui-icon-fonts-clear"></i>
             </el-menu-item>
         </el-menu>
         <el-menu :default-active="activeIndex" class="el-menu-demo navigate-header-right" mode="horizontal" @select="handleSelect" background-color="#545c64" text-color="#fff" active-text-color="#fff">
@@ -47,7 +50,7 @@
         text-align: center;
     }
     .is-active{
-        background-color: #009688 !important;
+        background-color: var(--color) !important;
     }
 </style>
 <script>
@@ -55,20 +58,34 @@ export default {
     name: "navigateTop",
     data() {
         return {
-            activeIndex: '0',
+            activeIndex: '0'
         };
     },
     computed: {
+        // 获取主题颜色
+        getThemeStyle() {
+            return this.$store.state.index.styleColor;
+        },
+        // 获取全屏状态
         getFullScreenStatus(){
             return this.$store.state.index.isFullScreen;
         },
+        // 获取侧边栏展开状态
         getLeftFoldStatus(){
             return this.$store.state.index.leftNavFold;
         }
     },
     methods: {
         handleSelect(key, keyPath){
-            // console.log(key, keyPath);
+            console.log(key, keyPath);
+            switch (key) {
+                case 3:
+                    // // 选择颜色按钮-事件代理
+                    // document.getElementById('selectColorBtn').click();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

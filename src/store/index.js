@@ -1,6 +1,8 @@
 export default {
     namespaced: true,
     state: {
+        // 主题颜色
+        styleColor: '#009688',
         // 是否全屏
         isFullScreen: false,
         // 侧边栏是否折叠

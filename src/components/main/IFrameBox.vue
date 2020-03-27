@@ -152,7 +152,7 @@
     }
 </style>
 <script>
-    import {mouseInit, prev, next, resize as scrollResize, changeLength} from '../assets/js/linearDrag.js';
+    import {mouseInit, prev, next, resize as scrollResize, changeLength} from '../../assets/js/linearDrag.js';
     export default {
         name: "iFrameBox",
         data() {
