@@ -56,6 +56,9 @@
 <script>
 export default {
     name: "navigateTop",
+    // components: {
+    //     layer: layer
+    // },
     data() {
         return {
             activeIndex: '0'
@@ -79,13 +82,17 @@ export default {
         handleSelect(key, keyPath){
             console.log(key, keyPath);
             switch (key) {
-                case 3:
-                    // // 选择颜色按钮-事件代理
-                    // document.getElementById('selectColorBtn').click();
+                case '3':
+                    // 打开主题选择面板
+                    this.openThemesPanel();
                     break;
                 default:
                     break;
             }
+        },
+        // 打开主题选择面板
+        openThemesPanel() {
+            console.log(this.$layer);
         }
     }
 }

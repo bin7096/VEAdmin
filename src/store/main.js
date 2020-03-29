@@ -4,9 +4,11 @@ Vue.use(Vuex);
 
 // 引入vuex模块
 import index from './index';
+import layer from './layer';
 // 主页的数据
 export default new Vuex.Store({
     modules: {
         index: index,
+        layer: layer
     }
 });
