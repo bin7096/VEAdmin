@@ -1,5 +1,6 @@
 <template>
     <div class="iframe-box">
+        <layer class="iframe-layer"/>
         <div class="iframe-title">
             <div class="iframe-title-left">
                 <span class="iframe-btn iframe-left-btn iframe-direction-btn" @click="prev('iframe_page_btn_box')">
@@ -45,6 +46,7 @@
     .iframe-box{
         background-color: #009688;
         height: calc(100% - 60px);
+        position: relative;
     }
     .iframe-box *{
         margin: 0;
@@ -149,6 +151,10 @@
     }
     .iframe-body .iframe-hidden{
         display: none;
+    }
+    .iframe-layer{
+        width: 100%;
+        position: absolute;
     }
 </style>
 <script>

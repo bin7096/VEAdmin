@@ -1,7 +1,10 @@
 <template class="iframes-box">
     <div class="iframes-box-div">
-        <div class="iframes-view">
-
+        <div class="iframes-list-view">
+            <div class="iframe-item-window">
+                <div class="iframe-item-window-title"></div>
+                <iframe class="iframe-item-view" src="" frameborder="0"></iframe>
+            </div>
         </div>
         <div :class="getOpenStatus ? 'iframes-list-tab' : 'iframe-element-hide'">
             <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index">
@@ -19,9 +22,33 @@
 </template>
 <style>
     .iframes-box, .iframes-box-div{
-        position: fixed;
-        top: 0;
-        left: 0;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+    .iframes-list-view{
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.7;
+        display: flex;
+        align-items: center;
+    }
+    .iframe-item-window{
+        width: 800px;
+        height: 600px;
+        margin: auto;
+    }
+    .iframe-item-window *{
+        border: 1px solid red;
+    }
+    .iframe-item-window-title{
+        width: 100%;
+        height: 38px;
+    }
+    .iframe-item-view{
+        width: 100%;
+        height: calc(100% - 38px);
     }
     .iframes-list-tab{
         height: calc(100% - 60px);
