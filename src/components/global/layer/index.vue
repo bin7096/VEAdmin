@@ -1,21 +1,28 @@
 <template class="iframes-box">
     <div class="iframes-box-div">
-        <div class="iframes-list-view">
-            <div class="iframe-item-window">
-                <div class="iframe-item-window-title"></div>
-                <iframe class="iframe-item-view" src="" frameborder="0"></iframe>
+        <div class="iframes-list-view" :class="$store.state.layer.showIndex === null ? 'iframes-list-view-hide' : ''">
+            <div class="iframe-item-window" v-for="(item, index) in getIframeLayerList" :key="index" :class="$store.state.layer.showIndex === index ? 'iframe-item-window-show' : ''">
+                <div class="iframe-item-window-title">
+                    <span class="iframe-item-title-left">{{item.title}}</span>
+                    <span class="iframe-item-title-right">
+                        <a class="iframe-item-btn iframe-item-btn-hide" @click="$store.commit('layer/hideWindow')"><i class="el-icon-minus"></i></a>
+                        <a class="iframe-item-btn iframe-item-btn-close" @click="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></a>
+                    </span>
+                    <span style="clear:both;"></span>
+                </div>
+                <iframe class="iframe-item-view" :src="item.src" frameborder="0"></iframe>
             </div>
         </div>
         <div :class="getOpenStatus ? 'iframes-list-tab' : 'iframe-element-hide'">
-            <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index">
+            <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index" @click="$store.dispatch('layer/selectWindowByIndex', index)">
                 <span class="iframe-item-title iframe-list-btn">{{item.title}}</span>
-                <span class="iframe-item-close iframe-list-btn" @click="$store.dispatch('layer/rmIFrameLayer', index)"><i class="el-icon-close"></i></span>
+                <span class="iframe-item-close iframe-list-btn" @click="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></span>
             </div>
-            <a class="iframe-list-btn iframes-bottom-btn" @click="closeList">
+            <a class="iframe-list-btn iframes-bottom-btn" @click="$store.commit('layer/closeList')">
                 <i class="el-icon-caret-right"></i> 关闭 iframe-layer 列表
             </a>
         </div>
-        <a class="iframe-list-btn iframes-left-btn" @click="openList"  v-if="!getOpenStatus">
+        <a class="iframe-list-btn iframes-left-btn" @click="$store.commit('layer/openList')"  v-if="!getOpenStatus">
             <i class="el-icon-caret-left"></i>
         </a>
     </div>
@@ -29,22 +36,49 @@
     .iframes-list-view{
         width: 100%;
         height: 100%;
-        background-color: black;
-        opacity: 0.7;
+        background-color: rgba(0, 0, 0, 0.7);
         display: flex;
         align-items: center;
+    }
+    .iframes-list-view-hide{
+        display: none;
     }
     .iframe-item-window{
         width: 800px;
         height: 600px;
         margin: auto;
+        display: none;
+    }
+    .iframe-item-window-show{
+        display: block;
     }
     .iframe-item-window *{
-        border: 1px solid red;
+        background-color: #FFF;
+        color: #000;
     }
     .iframe-item-window-title{
         width: 100%;
         height: 38px;
+        line-height: 38px;
+        font-size: 18px;
+        border-bottom: 1px solid #CCC;
+    }
+    .iframe-item-title-left{
+        float: left;
+        padding-left: .5rem;
+    }
+    .iframe-item-title-right{
+        float: right;
+        padding: 0 .5rem;
+        font-weight: bold;
+    }
+    .iframe-item-btn{
+        margin: 0 .2rem;
+    }
+    .iframe-item-btn:hover{
+        user-select: none;
+        cursor: pointer;
+        color: #009688;
     }
     .iframe-item-view{
         width: 100%;
@@ -125,10 +159,6 @@ export default {
         return {}
     },
     computed: {
-        // 获取左侧侧边栏开启状态-根据状态改变iframe-view宽度
-        getleftStatus() {
-            return this.$store.state.index.leftNavFold;
-        },
         // 获取iframe-layer列表开启状态
         getOpenStatus() {
             return this.$store.state.layer.listOpenStatus;
@@ -136,17 +166,9 @@ export default {
         // 获取已打开的iframe-layer列表
         getIframeLayerList() {
             return this.$store.state.layer.iframeLayerList;
-        }
+        },
     },
     methods: {
-        // 打开iframe-layer列表
-        openList() {
-            this.$store.commit('layer/openList');
-        },
-        // 关闭iframe-layer列表
-        closeList() {
-            this.$store.commit('layer/closeList');
-        }
         
     }
 }
