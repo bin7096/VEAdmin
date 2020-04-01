@@ -16,7 +16,7 @@
         <div :class="getOpenStatus ? 'iframes-list-tab' : 'iframe-element-hide'">
             <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index" @click="$store.dispatch('layer/selectWindowByIndex', index)">
                 <span class="iframe-item-title iframe-list-btn">{{item.title}}</span>
-                <span class="iframe-item-close iframe-list-btn" @click="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></span>
+                <span class="iframe-item-close iframe-list-btn" @click.stop="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></span>
             </div>
             <a class="iframe-list-btn iframes-bottom-btn" @click="$store.commit('layer/closeList')">
                 <i class="el-icon-caret-right"></i> 关闭 iframe-layer 列表
@@ -30,8 +30,6 @@
 <style>
     .iframes-box, .iframes-box-div{
         display: inline-block;
-        width: 100%;
-        height: 100%;
     }
     .iframes-list-view{
         width: 100%;

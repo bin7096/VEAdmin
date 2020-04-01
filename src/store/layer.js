@@ -46,13 +46,17 @@ export default {
                 index = parseInt(index);
                 state.iframeLayerList.splice(index, 1);
             }
+            console.log(index, state.showIndex);
+            console.log(index === state.showIndex);
             // 如果是关闭当前的窗口，将showIndex重置为null
             if (index === state.showIndex) {
                 state.showIndex = null;
             }
+            console.log(index, state.showIndex);
         },
         // 切换窗口
         selectWindow(state, index) {
+            console.log('selectWindow');
             state.showIndex = parseInt(index);
         },
         // 隐藏窗口
