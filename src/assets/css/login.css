@@ -1,7 +1,71 @@
+@import './common/media.pc.css';
+@import './common/media.mobile.css';
 .box, .login-box{
     width: 100%;
     height: 100%;
 }
 .login-box{
-    background: no-repeat url('../img/bg/login.jpg') 100%;
+    background: url('../img/bg/login.jpg') no-repeat center 0;
+    background-size: 100% 100%;
+    padding-top: 10rem;
+}
+.login-form{
+    width: 35rem;
+    height: 25rem;
+    margin: 0 auto;
+    border-radius: 1.5rem;
+    box-shadow: .1rem .1rem .5rem #888888;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+.login-head, .login-body, .login-foot{
+    width: 100%;
+}
+.login-head{
+    height: 6rem;
+    border-radius: 1.5rem 1.5rem 0 0;
+    font-weight: bold;
+}
+.login-body{
+    width: 100%;
+    height: 14rem;
+}
+.login-foot{
+    height: 5rem;
+    border-radius: 0 0 1.5rem 1.5rem;
+}
+.login-head-tab{
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    line-height: 6rem;
+    text-align: center;
+    background-color: #FFF;
+    letter-spacing: 1rem;
+    color: #555;
+}
+.login-head-tab-show{
+    background: rgba(255, 255, 255, 0);
+}
+.login-head-tab:first-child{
+    border-radius: 1.5rem 0 0 0;
+}
+.login-head-tab:last-child{
+    border-radius: 0 1.5rem 0 0;
+}
+.login-body-tab{
+    display: none;
+    width: 100%;
+    height: 100%;
+    line-height: 7rem;
+    padding: 0 7%;
+}
+.login-body-tab-show{
+    display: block;
+}
+.login-body-tab input{
+    padding-left: 1rem;
+    width: calc(86% - 1rem);
+    height: 4.2rem;
+    border: none;
+    /* border-radius: .8rem; */
 }
