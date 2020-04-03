@@ -55,45 +55,45 @@
 </style>
 <script>
 export default {
-    name: "navigateTop",
-    // components: {
-    //     layer: layer
-    // },
-    data() {
-        return {
-            activeIndex: '0'
-        };
+  name: 'navigateTop',
+  // components: {
+  //     layer: layer
+  // },
+  data() {
+    return {
+      activeIndex: '0'
+    };
+  },
+  computed: {
+    // 获取主题颜色
+    getThemeStyle() {
+      return this.$store.state.index.styleColor;
     },
-    computed: {
-        // 获取主题颜色
-        getThemeStyle() {
-            return this.$store.state.index.styleColor;
-        },
-        // 获取全屏状态
-        getFullScreenStatus(){
-            return this.$store.state.index.isFullScreen;
-        },
-        // 获取侧边栏展开状态
-        getLeftFoldStatus(){
-            return this.$store.state.index.leftNavFold;
-        }
+    // 获取全屏状态
+    getFullScreenStatus() {
+      return this.$store.state.index.isFullScreen;
     },
-    methods: {
-        handleSelect(key, keyPath){
-            console.log(key, keyPath);
-            switch (key) {
-                case '3':
-                    // 打开主题选择面板
-                    this.openThemesPanel();
-                    break;
-                default:
-                    break;
-            }
-        },
-        // 打开主题选择面板
-        openThemesPanel() {
-            console.log(this.$layer);
-        }
+    // 获取侧边栏展开状态
+    getLeftFoldStatus() {
+      return this.$store.state.index.leftNavFold;
     }
+  },
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+      switch (key) {
+        case '3':
+          // 打开主题选择面板
+          this.openThemesPanel();
+          break;
+        default:
+          break;
+      }
+    },
+    // 打开主题选择面板
+    openThemesPanel() {
+      console.log(this.$layer);
+    }
+  }
 }
 </script>

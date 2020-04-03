@@ -14,21 +14,21 @@
 <script>
 import menuTree from './MenuTree';
 export default {
-    name: "menuTree",
-    props: ['v', 'isTop'],
-    components: {
-        menuTree: menuTree
-    },
-    data (){
-        return {
-            item: this.v,
-            isTopItem: this.isTop,
-        };
-    },
-    methods: {
-        openIFrame: function (src) {
-            this.$parent.openIFrame(src);
-        }
-    },
+  name: 'menuTree',
+  props: ['v', 'isTop'],
+  components: {
+    menuTree: menuTree
+  },
+  data () {
+    return {
+      item: this.v,
+      isTopItem: this.isTop
+    };
+  },
+  methods: {
+    openIFrame: function (src) {
+      this.$parent.openIFrame(src);
+    }
+  }
 }
 </script>

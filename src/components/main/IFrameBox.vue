@@ -159,40 +159,41 @@
     }
 </style>
 <script>
-    import {mouseInit, prev, next, resize as scrollResize, changeLength} from '../../assets/js/linearDrag.js';
-    export default {
-        name: "iFrameBox",
-        data() {
-            return {iFramesLength: 0}
-        },
-        mounted() {
-            mouseInit('iframe_page_btn_box', 130, 'X', this.$store.state.index.iFrameList.length - 1);
-        },
-        computed: {
-            getIFrameIndex(){
-                return this.$store.state.index.activeIFrameIndex;
-            },
-            getIFrameList(){
-                return this.$store.state.index.iFrameList;
-            }
-        },
-        updated() {
-            if (this.iFramesLength !== this.$store.state.index.iFrameList.length) {
-                console.log('updated');
-                // getIFrameList渲染完成再更新标签滚动位置
-                this.$nextTick(function(){
-                    changeLength('iframe_page_btn_box', this.$store.state.index.iFrameList.length - 1);
-                });
-                this.iFramesLength = this.$store.state.index.iFrameList.length
-            }
-        },
-        methods: {
-            prev,
-            next,
-            iFrameReload(){
-                let index = this.$store.state.index.activeIFrameIndex;
-                $('.iframe-item').eq(index)[0].contentWindow.reload();
-            }
-        },
+import $ from 'zepto';
+import {mouseInit, prev, next, changeLength} from '../../assets/js/linearDrag.js';
+export default {
+  name: 'iFrameBox',
+  data() {
+    return {iFramesLength: 0}
+  },
+  mounted() {
+    mouseInit('iframe_page_btn_box', 130, 'X', this.$store.state.index.iFrameList.length - 1);
+  },
+  computed: {
+    getIFrameIndex() {
+      return this.$store.state.index.activeIFrameIndex;
+    },
+    getIFrameList() {
+      return this.$store.state.index.iFrameList;
     }
+  },
+  updated() {
+    if (this.iFramesLength !== this.$store.state.index.iFrameList.length) {
+      console.log('updated');
+      // getIFrameList渲染完成再更新标签滚动位置
+      this.$nextTick(function() {
+        changeLength('iframe_page_btn_box', this.$store.state.index.iFrameList.length - 1);
+      });
+      this.iFramesLength = this.$store.state.index.iFrameList.length
+    }
+  },
+  methods: {
+    prev,
+    next,
+    iFrameReload() {
+      let index = this.$store.state.index.activeIFrameIndex;
+      $('.iframe-item').eq(index)[0].contentWindow.reload();
+    }
+  }
+}
 </script>

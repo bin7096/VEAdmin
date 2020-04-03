@@ -153,21 +153,21 @@
 </style>
 <script>
 export default {
-    data() {
-        return {}
+  data() {
+    return {}
+  },
+  computed: {
+    // 获取iframe-layer列表开启状态
+    getOpenStatus() {
+      return this.$store.state.layer.listOpenStatus;
     },
-    computed: {
-        // 获取iframe-layer列表开启状态
-        getOpenStatus() {
-            return this.$store.state.layer.listOpenStatus;
-        },
-        // 获取已打开的iframe-layer列表
-        getIframeLayerList() {
-            return this.$store.state.layer.iframeLayerList;
-        },
-    },
-    methods: {
-        
+    // 获取已打开的iframe-layer列表
+    getIframeLayerList() {
+      return this.$store.state.layer.iframeLayerList;
     }
+  },
+  methods: {
+
+  }
 }
 </script>

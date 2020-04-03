@@ -39,194 +39,194 @@
     }
 </style>
 <script>
-    import menuTree from './MenuTree.vue';
-    export default {
-        name: 'navigateLeft',
-        components: {
-            menuTree: menuTree
-        },
-        data() {
-            return {
-                menuList: [
-                    {
-                        id: '1',
-                        title: '会员管理',
-                        iclass: 'el-icon-user-solid',
-                        location: 'https://xadmin.binid.cn',
-                        childs: [
-                            {
-                                id: '1-1',
-                                title: '会员列表',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '1-2',
-                                title: '会员删除',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '1-3',
-                                title: '会员管理',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: [
-                                    {
-                                        id: '1-3-1',
-                                        title: '会员列表',
-                                        iclass: '',
-                                        location: 'https://xadmin.binid.cn',
-                                        childs: []
-                                    },
-                                    {
-                                        id: '1-3-2',
-                                        title: '会员删除',
-                                        iclass: '',
-                                        location: 'https://xadmin.binid.cn',
-                                        childs: []
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        id: '2',
-                        title: '订单管理',
-                        iclass: 'el-icon-s-order',
-                        location: 'https://xadmin.binid.cn',
-                        childs: [
-                            {
-                                id: '2-1',
-                                title: '订单列表',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            }
-                        ]
-                    },
-                    {
-                        id: '3',
-                        title: '管理员管理',
-                        iclass: 'el-icon-s-custom',
-                        location: 'https://xadmin.binid.cn',
-                        childs: [
-                            {
-                                id: '3-1',
-                                title: '管理员列表',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '3-2',
-                                title: '角色管理',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '3-3',
-                                title: '权限分类',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '3-4',
-                                title: '权限管理',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            }
-                        ]
-                    },
-                    {
-                        id: '4',
-                        title: '系统统计',
-                        iclass: 'el-icon-s-data',
-                        location: 'https://xadmin.binid.cn',
-                        childs: [
-                            {
-                                id: '4-1',
-                                title: '折线图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-2',
-                                title: '柱状图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-3',
-                                title: '地图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-4',
-                                title: '饼图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-5',
-                                title: '雷达图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-6',
-                                title: 'k线图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-7',
-                                title: '热力图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            },
-                            {
-                                id: '4-8',
-                                title: '仪表图',
-                                iclass: '',
-                                location: 'https://xadmin.binid.cn',
-                                childs: []
-                            }
-                        ]
-                    },
-                    {
-                        id: '5',
-                        title: '测试菜单',
-                        iclass: 'el-icon-info',
-                        location: 'https://xadmin.binid.cn',
-                        childs: []
-                    }
-                ]
-            };
-        },
-        created(){
-            // console.log(this.leftNavFold);
-        },
-        methods: {
-            handleOpen(key, keyPath) {
-                // console.log('handleOpen', key, keyPath);
+import menuTree from './MenuTree.vue';
+export default {
+  name: 'navigateLeft',
+  components: {
+    menuTree: menuTree
+  },
+  data() {
+    return {
+      menuList: [
+        {
+          id: '1',
+          title: '会员管理',
+          iclass: 'el-icon-user-solid',
+          location: 'https://xadmin.binid.cn',
+          childs: [
+            {
+              id: '1-1',
+              title: '会员列表',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
             },
-            handleClose(key, keyPath) {
-                // console.log(key, keyPath);
+            {
+              id: '1-2',
+              title: '会员删除',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '1-3',
+              title: '会员管理',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: [
+                {
+                  id: '1-3-1',
+                  title: '会员列表',
+                  iclass: '',
+                  location: 'https://xadmin.binid.cn',
+                  childs: []
+                },
+                {
+                  id: '1-3-2',
+                  title: '会员删除',
+                  iclass: '',
+                  location: 'https://xadmin.binid.cn',
+                  childs: []
+                }
+              ]
             }
+          ]
+        },
+        {
+          id: '2',
+          title: '订单管理',
+          iclass: 'el-icon-s-order',
+          location: 'https://xadmin.binid.cn',
+          childs: [
+            {
+              id: '2-1',
+              title: '订单列表',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            }
+          ]
+        },
+        {
+          id: '3',
+          title: '管理员管理',
+          iclass: 'el-icon-s-custom',
+          location: 'https://xadmin.binid.cn',
+          childs: [
+            {
+              id: '3-1',
+              title: '管理员列表',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '3-2',
+              title: '角色管理',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '3-3',
+              title: '权限分类',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '3-4',
+              title: '权限管理',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            }
+          ]
+        },
+        {
+          id: '4',
+          title: '系统统计',
+          iclass: 'el-icon-s-data',
+          location: 'https://xadmin.binid.cn',
+          childs: [
+            {
+              id: '4-1',
+              title: '折线图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-2',
+              title: '柱状图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-3',
+              title: '地图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-4',
+              title: '饼图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-5',
+              title: '雷达图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-6',
+              title: 'k线图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-7',
+              title: '热力图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            },
+            {
+              id: '4-8',
+              title: '仪表图',
+              iclass: '',
+              location: 'https://xadmin.binid.cn',
+              childs: []
+            }
+          ]
+        },
+        {
+          id: '5',
+          title: '测试菜单',
+          iclass: 'el-icon-info',
+          location: 'https://xadmin.binid.cn',
+          childs: []
         }
+      ]
+    };
+  },
+  created() {
+    // console.log(this.leftNavFold);
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      // console.log('handleOpen', key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      // console.log(key, keyPath);
     }
+  }
+}
 </script>

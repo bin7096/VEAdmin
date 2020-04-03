@@ -1,3 +1,4 @@
+import $ from 'zepto';
 /**
  * 用于储存多个滚动DOM信息
  * scrollObj   滚动的节点
@@ -23,95 +24,95 @@ let isDown = false;
  * @params num       Number 滚动元素的子节点数量
 */
 export let mouseInit = function (scrollId, disNum, direction, num) {
-    scrollInfo[scrollId] = {
-        // 滚动的节点
-        scrollObj   : document.getElementById(scrollId),
-        // 当前是否已按下鼠标（true或false）
-        isDown      : false,
-        // 滚动方向（X-横向，Y-纵向）
-        scrollTo    : direction === 'Y' ? 'Y' : 'X',
-        // 可滚动距离
-        scrollable  : 0,
-        // 子节点总长度
-        childLength : Math.abs(Number(num) * Number(disNum)),
-        // 单个子节点长度
-        aLength     : Math.abs(Number(disNum)),
-        // 已经滚动过的距离
-        scrolled    : 0,
-        // 按下鼠标时的位置（event的clientX或clientY属性）
-        position    : 0,
-        // 获取位置的参数名（clientX或clientY）
-        pName       : scrollTo === 'Y' ? 'clientY' : 'clientX'
+  scrollInfo[scrollId] = {
+    // 滚动的节点
+    scrollObj: document.getElementById(scrollId),
+    // 当前是否已按下鼠标（true或false）
+    isDown: false,
+    // 滚动方向（X-横向，Y-纵向）
+    scrollTo: direction === 'Y' ? 'Y' : 'X',
+    // 可滚动距离
+    scrollable: 0,
+    // 子节点总长度
+    childLength: Math.abs(Number(num) * Number(disNum)),
+    // 单个子节点长度
+    aLength: Math.abs(Number(disNum)),
+    // 已经滚动过的距离
+    scrolled: 0,
+    // 按下鼠标时的位置（event的clientX或clientY属性）
+    position: 0,
+    // 获取位置的参数名（clientX或clientY）
+    pName: scrollTo === 'Y' ? 'clientY' : 'clientX'
+  }
+  // 延时操作。。。
+  let st = setTimeout(() => {
+    // 元素的可滚动距离
+    let length = 0;
+    if (scrollTo === 'Y') {
+      // 纵向滚动，获取元素高度
+      length = $(scrollInfo[scrollId].scrollObj).height();
+    } else {
+      // 横向滚动，获取元素的宽度
+      length = $(scrollInfo[scrollId].scrollObj).width();
     }
-    // 延时操作。。。
-    let st = setTimeout(() => {
-        // 元素的可滚动距离
-        let length = 0;
-        if (scrollTo === 'Y') {
-            // 纵向滚动，获取元素高度
-            length = $(scrollInfo[scrollId].scrollObj).height();
-        }else{
-            // 横向滚动，获取元素的宽度
-            length = $(scrollInfo[scrollId].scrollObj).width();
-        }
-        scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
-        console.log('scrollObj:', scrollInfo[scrollId].scrollObj);
-        console.log('childLength:', scrollInfo[scrollId].childLength);
-        console.log('length:', length);
-        console.log('scrollable:', scrollInfo[scrollId].scrollable);
-        // 监听鼠标按下
-        scrollInfo[scrollId].scrollObj.addEventListener('mousedown', mouseDown, false);
-        // 监听鼠标移动
-        scrollInfo[scrollId].scrollObj.addEventListener('mousemove', mouseMove, false);
-        // 监听鼠标松开（连同范围外的区域一起）
-        document.addEventListener('mouseup', mouseUp, false);
-        // 监听窗口变化事件
-        window.addEventListener('resize', resize);
-        clearTimeout(st);
-    }, 500);
+    scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
+    console.log('scrollObj:', scrollInfo[scrollId].scrollObj);
+    console.log('childLength:', scrollInfo[scrollId].childLength);
+    console.log('length:', length);
+    console.log('scrollable:', scrollInfo[scrollId].scrollable);
+    // 监听鼠标按下
+    scrollInfo[scrollId].scrollObj.addEventListener('mousedown', mouseDown, false);
+    // 监听鼠标移动
+    scrollInfo[scrollId].scrollObj.addEventListener('mousemove', mouseMove, false);
+    // 监听鼠标松开（连同范围外的区域一起）
+    document.addEventListener('mouseup', mouseUp, false);
+    // 监听窗口变化事件
+    window.addEventListener('resize', resize);
+    clearTimeout(st);
+  }, 500);
 }
 // 上一个
 export let prev = function (id) {
-    if (!scrollInfo.hasOwnProperty(id)) {return;}
-    let obj = scrollInfo[id];
-    if (obj.scrolled === 0) {return;}
-    let surplus = obj.scrolled % obj.aLength;
-    if (surplus === 0) {
-        surplus += obj.aLength;
-    }
-    obj.scrolled -= surplus;
-    if (obj.scrollTo === 'Y') {
-        // 纵向滚动
-        $(obj.scrollObj).scrollTop(obj.scrolled);
-    }else{
-        // 横向滚动
-        $(obj.scrollObj).scrollLeft(obj.scrolled);
-    }
+  if (!scrollInfo.hasOwnProperty(id)) { return; }
+  let obj = scrollInfo[id];
+  if (obj.scrolled === 0) { return; }
+  let surplus = obj.scrolled % obj.aLength;
+  if (surplus === 0) {
+    surplus += obj.aLength;
+  }
+  obj.scrolled -= surplus;
+  if (obj.scrollTo === 'Y') {
+    // 纵向滚动
+    $(obj.scrollObj).scrollTop(obj.scrolled);
+  } else {
+    // 横向滚动
+    $(obj.scrollObj).scrollLeft(obj.scrolled);
+  }
 }
 // 下一个
 export let next = function (id) {
-    if (!scrollInfo.hasOwnProperty(id)) {return;}
-    let obj = scrollInfo[id];
-    if (obj.scrolled >= obj.scrollable) {return;}
-    let surplus = (obj.scrollable - obj.scrolled) % obj.aLength;
-    if (surplus === 0) {
-        surplus += obj.aLength;
-    }
-    obj.scrolled += surplus;
-    if (obj.scrollTo === 'Y') {
-        // 纵向滚动
-        $(obj.scrollObj).scrollTop(obj.scrolled);
-    }else{
-        // 横向滚动
-        $(obj.scrollObj).scrollLeft(obj.scrolled);
-    }
+  if (!scrollInfo.hasOwnProperty(id)) { return; }
+  let obj = scrollInfo[id];
+  if (obj.scrolled >= obj.scrollable) { return; }
+  let surplus = (obj.scrollable - obj.scrolled) % obj.aLength;
+  if (surplus === 0) {
+    surplus += obj.aLength;
+  }
+  obj.scrolled += surplus;
+  if (obj.scrollTo === 'Y') {
+    // 纵向滚动
+    $(obj.scrollObj).scrollTop(obj.scrolled);
+  } else {
+    // 横向滚动
+    $(obj.scrollObj).scrollLeft(obj.scrolled);
+  }
 }
 // 鼠标按下事件
 let mouseDown = function (event) {
-    domId = $(this).attr('id');
-    let obj = scrollInfo[domId];
-    obj.isDown = isDown = true;
-    obj.position = event[obj.pName] + obj.scrolled;
+  domId = $(this).attr('id');
+  let obj = scrollInfo[domId];
+  obj.isDown = isDown = true;
+  obj.position = event[obj.pName] + obj.scrolled;
 }
 /**
  * 鼠标按下时，记录鼠标的clientX
@@ -122,78 +123,78 @@ let mouseDown = function (event) {
 */
 // 鼠标移动事件
 let mouseMove = function (event) {
-    let id = $(this).attr('id');
-    let obj = scrollInfo[id];
-    if (!obj.isDown) {return;}
-    let l = event[obj.pName] - obj.position;
-    l = 0 - l;
-    if (Math.abs(l) > obj.scrollable || l < 0) {return;}
-    obj.scrolled = l;
-    // 滚动距离，JQ的scrollLeft和scrollTop参数需要总的值
-    if (obj.scrollTo === 'Y') {
-        // 纵向滚动
-        $(obj.scrollObj).scrollTop(l);
-    }else{
-        // 横向滚动
-        $(obj.scrollObj).scrollLeft(l);
-    }
+  let id = $(this).attr('id');
+  let obj = scrollInfo[id];
+  if (!obj.isDown) { return; }
+  let l = event[obj.pName] - obj.position;
+  l = 0 - l;
+  if (Math.abs(l) > obj.scrollable || l < 0) { return; }
+  obj.scrolled = l;
+  // 滚动距离，JQ的scrollLeft和scrollTop参数需要总的值
+  if (obj.scrollTo === 'Y') {
+    // 纵向滚动
+    $(obj.scrollObj).scrollTop(l);
+  } else {
+    // 横向滚动
+    $(obj.scrollObj).scrollLeft(l);
+  }
 }
 // 鼠标松开事件
 let mouseUp = function (event) {
-    if (!isDown) {return;}
-    scrollInfo[domId].isDown = isDown = false;
+  if (!isDown) { return; }
+  scrollInfo[domId].isDown = isDown = false;
 }
 // 窗口变化事件
 export let resize = function (event) {
-    for (const key in scrollInfo) {
-        // 元素的可滚动距离
-        let length = 0;
-        if (scrollInfo[key].scrollTo === 'Y') {
-            // 纵向滚动，获取元素高度
-            length = $(scrollInfo[key].scrollObj).height();
-        }else{
-            // 横向滚动，获取元素的宽度
-            length = $(scrollInfo[key].scrollObj).width();
-        }
-        scrollInfo[key].scrollable = scrollInfo[key].childLength - length <= 0 ? 0 : scrollInfo[key].childLength - length;
-        // 重置DOM元素的滚动位置
-        if (scrollInfo[key].scrollTo === 'Y') {
-            // 纵向滚动
-            $(scrollInfo[key].scrollObj).scrollTop(0);
-        }else{
-            // 横向滚动
-            $(scrollInfo[key].scrollObj).scrollLeft(0);
-        }
+  for (const key in scrollInfo) {
+    // 元素的可滚动距离
+    let length = 0;
+    if (scrollInfo[key].scrollTo === 'Y') {
+      // 纵向滚动，获取元素高度
+      length = $(scrollInfo[key].scrollObj).height();
+    } else {
+      // 横向滚动，获取元素的宽度
+      length = $(scrollInfo[key].scrollObj).width();
     }
+    scrollInfo[key].scrollable = scrollInfo[key].childLength - length <= 0 ? 0 : scrollInfo[key].childLength - length;
+    // 重置DOM元素的滚动位置
+    if (scrollInfo[key].scrollTo === 'Y') {
+      // 纵向滚动
+      $(scrollInfo[key].scrollObj).scrollTop(0);
+    } else {
+      // 横向滚动
+      $(scrollInfo[key].scrollObj).scrollLeft(0);
+    }
+  }
 }
 
 // 子元素数量发生变化时调用
 export let changeLength = function (scrollId, num) {
-    if (!scrollInfo.hasOwnProperty(scrollId)) {return;}
-    scrollInfo[scrollId].childLength = Math.abs(Number(num) * scrollInfo[scrollId].aLength);
-    console.log('childLength:', scrollInfo[scrollId].childLength);
-    // 元素的可滚动距离
-    let length = 0;
-    if (scrollTo === 'Y') {
-        // 纵向滚动，获取元素高度
-        length = $(scrollInfo[scrollId].scrollObj).height();
-    }else{
-        // 横向滚动，获取元素的宽度
-        length = $(scrollInfo[scrollId].scrollObj).width();
-    }
-    console.log('length:', length);
-    scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
-    // if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
-    //     // 减少时
-        if (scrollInfo[scrollId].scrollTo === 'Y') {
-            // 纵向滚动
-            $(scrollInfo[scrollId].scrollObj).scrollTop(scrollInfo[scrollId].scrollable);
-        }else{
-            // 横向滚动
-            $(scrollInfo[scrollId].scrollObj).scrollLeft(scrollInfo[scrollId].scrollable);
-        }
-        scrollInfo[scrollId].scrolled = scrollInfo[scrollId].scrollable;
-    // }
-    console.log('scrollable:', scrollInfo[scrollId].scrollable);
-    console.log('scrolled:', scrollInfo[scrollId].scrolled);
+  if (!scrollInfo.hasOwnProperty(scrollId)) { return; }
+  scrollInfo[scrollId].childLength = Math.abs(Number(num) * scrollInfo[scrollId].aLength);
+  console.log('childLength:', scrollInfo[scrollId].childLength);
+  // 元素的可滚动距离
+  let length = 0;
+  if (scrollTo === 'Y') {
+    // 纵向滚动，获取元素高度
+    length = $(scrollInfo[scrollId].scrollObj).height();
+  } else {
+    // 横向滚动，获取元素的宽度
+    length = $(scrollInfo[scrollId].scrollObj).width();
+  }
+  console.log('length:', length);
+  scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
+  // if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
+  //     // 减少时
+  if (scrollInfo[scrollId].scrollTo === 'Y') {
+    // 纵向滚动
+    $(scrollInfo[scrollId].scrollObj).scrollTop(scrollInfo[scrollId].scrollable);
+  } else {
+    // 横向滚动
+    $(scrollInfo[scrollId].scrollObj).scrollLeft(scrollInfo[scrollId].scrollable);
+  }
+  scrollInfo[scrollId].scrolled = scrollInfo[scrollId].scrollable;
+  // }
+  console.log('scrollable:', scrollInfo[scrollId].scrollable);
+  console.log('scrolled:', scrollInfo[scrollId].scrolled);
 }

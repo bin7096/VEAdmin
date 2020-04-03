@@ -47,7 +47,7 @@ module.exports = {
   },
   module: {
     rules: [
-      // ...(config.dev.useEslint ? [createLintingRule()] : []),
+      ...(config.dev.useEslint ? [createLintingRule()] : []),
       {
         test: /\.js$/,
         //把对.js 的文件处理交给id为happyBabel 的HappyPack 的实例执行

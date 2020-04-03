@@ -11,6 +11,7 @@
             </div>
             <div class="login-foot"></div>
         </div>
+        <a href="javascript:void(0);" class="login-btn"><i class="el-icon-right"></i></a>
     </div>
 </template>
 <style>
@@ -18,27 +19,27 @@
 </style>
 <script>
 export default {
-    data() {
-        return {
-            tabIndex: 0,
-            tabs: [
-                {
-                    context: '登录',
-                    inputs: [
-                        {field: 'username', prompt: '账号/手机号/邮箱', reg: null, type: 'text'},
-                        {field: 'password', prompt: '请输入密码', reg: null, type: 'password'},
-                    ]
-                },
-                {
-                    context: '注册',
-                    inputs: [
-                        {field: 'telphone', prompt: '请输入手机号', reg: null, type: 'text'},
-                        {field: 'password', prompt: '请输入密码', reg: null, type: 'password'},
-                        {field: 'authcode', prompt: '请输入验证码', reg: null, type: 'text'},
-                    ]
-                },
-            ]
+  data() {
+    return {
+      tabIndex: 0,
+      tabs: [
+        {
+          context: '登录',
+          inputs: [
+            {field: 'username', prompt: '账号/手机号/邮箱', reg: null, type: 'text'},
+            {field: 'password', prompt: '请输入密码', reg: null, type: 'password'}
+          ]
+        },
+        {
+          context: '注册',
+          inputs: [
+            {field: 'telphone', prompt: '请输入手机号', reg: null, type: 'text'},
+            {field: 'password', prompt: '请输入密码', reg: null, type: 'password'},
+            {field: 'authcode', prompt: '请输入验证码', reg: null, type: 'text'}
+          ]
         }
+      ]
     }
+  }
 }
 </script>

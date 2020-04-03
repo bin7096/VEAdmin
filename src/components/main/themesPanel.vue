@@ -3,18 +3,18 @@
 </template>
 <script>
 export default {
-    name: "themesPanel",
-    // props: {
-    //     layerid: {
-    //         type: String,
-    //         default: ""
-    //     },
-    //     lydata: {
-    //         type: Object,
-    //         default: () => {
-    //             return {};
-    //         }
-    //     }
-    // },
+  name: 'themesPanel'
+  // props: {
+  //     layerid: {
+  //         type: String,
+  //         default: ""
+  //     },
+  //     lydata: {
+  //         type: Object,
+  //         default: () => {
+  //             return {};
+  //         }
+  //     }
+  // },
 }
 </script>

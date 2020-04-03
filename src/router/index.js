@@ -7,16 +7,16 @@ import index from '@/views/index';
 Vue.use(Router);
 
 export default new Router({
-    routes: [
-        {
-            path: '/',
-            name: 'login',
-            component: login
-        },
-        {
-            path: '/index',
-            name: 'index',
-            component: index
-        },
-    ]
+  routes: [
+    {
+      path: '/',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/index',
+      name: 'index',
+      component: index
+    }
+  ]
 });
