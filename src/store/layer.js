@@ -56,7 +56,6 @@ export default {
     },
     // 切换窗口
     selectWindow(state, index) {
-      console.log('selectWindow');
       state.showIndex = parseInt(index);
     },
     // 隐藏窗口
