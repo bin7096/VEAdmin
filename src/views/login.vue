@@ -26,6 +26,7 @@
     @import '../assets/css/login.css';
 </style>
 <script>
+import md5 from 'js-md5';
 export default {
   data() {
     return {
@@ -35,17 +36,17 @@ export default {
           type: 'login',
           context: '登录',
           inputs: [
-            {field: 'username', reg: null, isError: false, eMsg: '昵称必须是字母数字_', type: 'text', prompt: '账号/手机号/邮箱'},
-            {field: 'password', reg: null, isError: false, eMsg: '密码必须是纯数字', type: 'password', prompt: '请输入密码'}
+            {field: 'username', value: null, reg: /[A-Za-z0-9_]/g, isError: false, eMsg: '昵称必须是字母数字_', type: 'text', prompt: '账号/手机号/邮箱'},
+            {field: 'password', value: null, reg: /[0-9]/g, isError: false, eMsg: '密码必须是纯数字', type: 'password', prompt: '请输入密码'}
           ]
         },
         {
           type: 'register',
           context: '注册',
           inputs: [
-            {field: 'telphone', reg: null, isError: false, eMsg: '手机号必须是11位数字', type: 'text', prompt: '请输入手机号'},
-            {field: 'password', reg: null, isError: false, eMsg: '密码必须是纯数字', type: 'password', prompt: '请输入密码'},
-            {field: 'authcode', reg: null, isError: false, eMsg: '验证码必须是纯数字', type: 'text', prompt: '请输入短信验证码'}
+            {field: 'telphone', value: null, reg: null, isError: false, eMsg: '手机号必须是11位数字', type: 'text', prompt: '请输入手机号'},
+            {field: 'password', value: null, reg: null, isError: false, eMsg: '密码必须是纯数字', type: 'password', prompt: '请输入密码'},
+            {field: 'authcode', value: null, reg: null, isError: false, eMsg: '验证码必须是纯数字', type: 'text', prompt: '请输入短信验证码'}
           ]
         }
       ]
@@ -54,9 +55,27 @@ export default {
   methods: {
     checkInput(tabId, inputId, value) {
       console.log(tabId, inputId, value);
-      let regExp = this.tabs[tabId].inputs[inputId].reg;
+      let inputObj = this.tabs[tabId].inputs[inputId];
+      let regExp = inputObj.reg;
       if (regExp !== null) {
-        this.tabs[tabId].inputs[inputId] = regExp.test(value);
+        inputObj.isError = !regExp.test(value);
+      }
+      inputObj.value = value;
+    },
+    login() {
+      let inputs = this.tabs[0].inputs;
+      const username = inputs[0].value;
+      const password = inputs[1].value;
+      if (username === 'admin' && password === '12345678') {
+        // 模拟后端生成token
+        let time = new Date().valueOf();
+        const token = md5(time);
+        time += 86400000;
+        // 写入localStrong
+        localStorage.setItem('VEAdmin', JSON.stringify({
+          expireTime: time,
+          token: token
+        }));
       }
     },
     loginByOther(type) {
