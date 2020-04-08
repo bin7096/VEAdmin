@@ -19,14 +19,14 @@
             </div>
             <div class="login-foot"></div>
         </div>
-        <a href="javascript:void(0);" class="login-btn"><i class="el-icon-right"></i></a>
+        <a href="javascript:void(0);" class="login-btn" @click="login();"><i class="el-icon-right"></i></a>
     </div>
 </template>
 <style>
     @import '../assets/css/login.css';
 </style>
 <script>
-import md5 from 'js-md5';
+// import md5 from 'js-md5';
 export default {
   data() {
     return {
@@ -66,17 +66,19 @@ export default {
       let inputs = this.tabs[0].inputs;
       const username = inputs[0].value;
       const password = inputs[1].value;
-      if (username === 'admin' && password === '12345678') {
-        // 模拟后端生成token
-        let time = new Date().valueOf();
-        const token = md5(time);
-        time += 86400000;
-        // 写入localStrong
-        localStorage.setItem('VEAdmin', JSON.stringify({
-          expireTime: time,
-          token: token
-        }));
-      }
+      console.log(username, password);
+      // if (username === 'admin' && password === '12345678') {
+      //   // 模拟后端生成token
+      //   let time = new Date().valueOf();
+      //   const token = md5(time);
+      //   time += 86400000;
+      //   const info = JSON.stringify({
+      //     expireTime: time,
+      //     token: token
+      //   })
+      //   // 写入localStrong
+      //   localStorage.setItem('VEAdmin', info);
+      // }
     },
     loginByOther(type) {
       let mean = '微博';
