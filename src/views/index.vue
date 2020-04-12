@@ -119,10 +119,10 @@ export default {
       this.$store.commit('index/fullScreenStatus');
     },
     selectPage: function (index) {
-      console.log('parent:', this.iFrameBtnList);
+      // console.log('parent:', this.iFrameBtnList);
     },
     openPage: function (src) {
-      console.log('src:', src);
+      // console.log('src:', src);
     }
   }
 }

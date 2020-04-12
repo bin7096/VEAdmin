@@ -6,7 +6,7 @@ export default {
     // 登录信息过期时间
     expireTime: 0,
     // 后端生成的token
-    authToken: ''
+    authToken: 0
   },
   mutations: {
     setAuthToken(state, token) {

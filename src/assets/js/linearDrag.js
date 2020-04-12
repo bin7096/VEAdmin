@@ -56,10 +56,10 @@ export let mouseInit = function (scrollId, disNum, direction, num) {
       length = $(scrollInfo[scrollId].scrollObj).width();
     }
     scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
-    console.log('scrollObj:', scrollInfo[scrollId].scrollObj);
-    console.log('childLength:', scrollInfo[scrollId].childLength);
-    console.log('length:', length);
-    console.log('scrollable:', scrollInfo[scrollId].scrollable);
+    // console.log('scrollObj:', scrollInfo[scrollId].scrollObj);
+    // console.log('childLength:', scrollInfo[scrollId].childLength);
+    // console.log('length:', length);
+    // console.log('scrollable:', scrollInfo[scrollId].scrollable);
     // 监听鼠标按下
     scrollInfo[scrollId].scrollObj.addEventListener('mousedown', mouseDown, false);
     // 监听鼠标移动
@@ -182,7 +182,7 @@ export let changeLength = function (scrollId, num) {
     // 横向滚动，获取元素的宽度
     length = $(scrollInfo[scrollId].scrollObj).width();
   }
-  console.log('length:', length);
+  // console.log('length:', length);
   scrollInfo[scrollId].scrollable = scrollInfo[scrollId].childLength - length <= 0 ? 0 : scrollInfo[scrollId].childLength - length;
   // if (scrollInfo[scrollId].scrolled > scrollInfo[scrollId].scrollable) {
   //     // 减少时
@@ -195,6 +195,6 @@ export let changeLength = function (scrollId, num) {
   }
   scrollInfo[scrollId].scrolled = scrollInfo[scrollId].scrollable;
   // }
-  console.log('scrollable:', scrollInfo[scrollId].scrollable);
-  console.log('scrolled:', scrollInfo[scrollId].scrolled);
+  // console.log('scrollable:', scrollInfo[scrollId].scrollable);
+  // console.log('scrolled:', scrollInfo[scrollId].scrolled);
 }
