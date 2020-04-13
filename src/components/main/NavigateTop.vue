@@ -8,7 +8,7 @@
             <el-menu-item index="2" title="前台">
                 <a href="/"><i class="el-icon-view"></i></a>
             </el-menu-item>
-            <el-menu-item index="3" title="颜色">
+            <el-menu-item index="3" title="颜色" @click="$store.commit('layer/openWindow', stylePickerInfo)">
                 <i class="layui-icon layui-icon-fonts-clear"></i>
             </el-menu-item>
         </el-menu>
@@ -61,7 +61,8 @@ export default {
   // },
   data() {
     return {
-      activeIndex: '0'
+      activeIndex: '0',
+      stylePickerInfo: {title: '主题选择器', src: `${location.protocol}//${location.host}/stylePicker`, name: 'stylePicker', width: '800px', height: '600px'}
     };
   },
   computed: {
@@ -81,18 +82,14 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-      switch (key) {
-        case '3':
-          // 打开主题选择面板
-          this.openThemesPanel();
-          break;
-        default:
-          break;
-      }
-    },
-    // 打开主题选择面板
-    openThemesPanel() {
-      console.log(this.$layer);
+      // switch (key) {
+      //   case '3':
+      //     // 打开主题选择面板
+      //     this.openThemesPanel();
+      //     break;
+      //   default:
+      //     break;
+      // }
     }
   }
 }

@@ -12,7 +12,7 @@ export default {
     // iframe窗口信息-列表
     iFrameList: [
       // {id: -1, title: '主页', src: 'https://xadmin.binid.cn'}
-      {id: -1, title: '主页', src: `${location.protocol}//${location.host}/#/404`}
+      {id: -1, title: '主页', src: `${location.protocol}//${location.host}/404`}
     ],
     // iFrame链接集合
     iFrameSet: new Set()

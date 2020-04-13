@@ -1,29 +1,29 @@
 <template class="box">
-    <div class="login-box">
-        <div class="login-form">
-            <div class="login-head">
-                <span class="login-head-tab" v-for="(item, index) in tabs" :key="index" :class="index === tabIndex ? 'login-head-tab-show' : ''" @click="tabIndex = index;">{{item.context}}</span>
-            </div>
-            <div class="login-body">
-                <div class="login-body-tab" v-for="(item, index) in tabs" :key="index" :class="index === tabIndex ? 'login-body-tab-show' : ''">
-                  <div class="login-body-input" v-for="(val, key) in item.inputs" :key="key" :class="val.isError ? 'login-body-input-error' : ''">
-                    <input :placeholder="val.prompt" :type="val.type" @input="checkInput(index, key, $event.currentTarget.value);" @keyup.enter="next(val.next)" :ref="val.field"/>
-                    <span class="login-body-error-msg">{{val.eMsg}}</span>
-                  </div>
-                    <div class="login-body-other-means" v-if="item.type === 'login'">
-                      <i @click="loginByOther(1)" class="login-body-other-means-icon layui-icon layui-icon-login-wechat"></i>
-                      <i @click="loginByOther(2)" class="login-body-other-means-icon layui-icon layui-icon-login-qq"></i>
-                      <i @click="loginByOther(3)" class="login-body-other-means-icon layui-icon layui-icon-login-weibo"></i>
-                    </div>
+  <div class="login-box">
+      <div class="login-form">
+          <div class="login-head">
+              <span class="login-head-tab" v-for="(item, index) in tabs" :key="index" :class="index === tabIndex ? 'login-head-tab-show' : ''" @click="tabIndex = index;">{{item.context}}</span>
+          </div>
+          <div class="login-body">
+              <div class="login-body-tab" v-for="(item, index) in tabs" :key="index" :class="index === tabIndex ? 'login-body-tab-show' : ''">
+                <div class="login-body-input" v-for="(val, key) in item.inputs" :key="key" :class="val.isError ? 'login-body-input-error' : ''">
+                  <input :placeholder="val.prompt" :type="val.type" @input="checkInput(index, key, $event.currentTarget.value);" @keyup.enter="next(val.next)" :ref="val.field"/>
+                  <span class="login-body-error-msg">{{val.eMsg}}</span>
                 </div>
-            </div>
-            <div class="login-foot"></div>
-        </div>
-        <a href="javascript:void(0);" class="login-btn" @click="login();"><i class="el-icon-right"></i></a>
-    </div>
+                  <div class="login-body-other-means" v-if="item.type === 'login'">
+                    <i @click="loginByOther(1)" class="login-body-other-means-icon layui-icon layui-icon-login-wechat"></i>
+                    <i @click="loginByOther(2)" class="login-body-other-means-icon layui-icon layui-icon-login-qq"></i>
+                    <i @click="loginByOther(3)" class="login-body-other-means-icon layui-icon layui-icon-login-weibo"></i>
+                  </div>
+              </div>
+          </div>
+          <div class="login-foot"></div>
+      </div>
+      <a href="javascript:void(0);" class="login-btn" @click="login();"><i class="el-icon-right"></i></a>
+  </div>
 </template>
 <style>
-    @import '../assets/css/login.css';
+  @import '../assets/css/login.css';
 </style>
 <script>
 import md5 from 'js-md5';
@@ -104,7 +104,7 @@ export default {
           // 写入localStrong
           window.localStorage.setItem('login_info', info);
           // 跳转到index页面
-          this.$router.push('/index');
+          this.$router.push('/');
         }
       }
     },

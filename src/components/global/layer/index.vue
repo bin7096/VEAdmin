@@ -6,7 +6,7 @@
                     <span class="iframe-item-title-left">{{item.title}}</span>
                     <span class="iframe-item-title-right">
                         <a class="iframe-item-btn iframe-item-btn-hide" @click="$store.commit('layer/hideWindow')"><i class="el-icon-minus"></i></a>
-                        <a class="iframe-item-btn iframe-item-btn-close" @click="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></a>
+                        <a class="iframe-item-btn iframe-item-btn-close" @click="$store.commit('layer/removeWindow', index)"><i class="el-icon-close"></i></a>
                     </span>
                     <span style="clear:both;"></span>
                 </div>
@@ -14,9 +14,9 @@
             </div>
         </div>
         <div :class="getOpenStatus ? 'iframes-list-tab' : 'iframe-element-hide'">
-            <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index" @click="$store.dispatch('layer/selectWindowByIndex', index)">
+            <div class="iframe-item-tab" v-for="(item, index) in getIframeLayerList" :key="index" @click="$store.commit('layer/selectWindow', index)">
                 <span class="iframe-item-title iframe-list-btn">{{item.title}}</span>
-                <span class="iframe-item-close iframe-list-btn" @click.stop="$store.dispatch('layer/removeLayerByIndex', index)"><i class="el-icon-close"></i></span>
+                <span class="iframe-item-close iframe-list-btn" @click.stop="$store.commit('layer/removeWindow', index)"><i class="el-icon-close"></i></span>
             </div>
             <a class="iframe-list-btn iframes-bottom-btn" @click="$store.commit('layer/closeList')">
                 <i class="el-icon-caret-right"></i> 关闭 iframe-layer 列表

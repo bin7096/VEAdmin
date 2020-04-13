@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import notFound from '@/views/404';
-import login from '@/views/login';
 import index from '@/views/index';
+import login from '@/views/login';
+import stylePicker from '@/views/stylePicker';
 
 Vue.use(Router);
 
 const router = new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -18,6 +20,11 @@ const router = new Router({
           path: '/login',
           name: 'login',
           component: login
+        },
+        {
+          path: '/stylePicker',
+          name: 'stylePicker',
+          component: stylePicker
         }
       ]
     },
