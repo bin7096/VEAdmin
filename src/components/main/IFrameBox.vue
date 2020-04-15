@@ -1,6 +1,6 @@
 <template>
     <div class="iframe-box">
-        <layer class="iframe-layer"/>
+        <layer class="iframe-layer" :style="$store.state.layer.showIndex === null ? 'z-index:0;' : ''"/>
         <div class="iframe-title">
             <div class="iframe-title-left">
                 <span class="iframe-btn iframe-left-btn iframe-direction-btn" @click="prev('iframe_page_btn_box')">
@@ -154,6 +154,7 @@
     }
     .iframe-layer{
         width: 100%;
+        height: 100%;
         position: absolute;
         z-index: 1000;
     }

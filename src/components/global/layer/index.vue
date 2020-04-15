@@ -58,7 +58,7 @@
         width: 100%;
         height: 38px;
         line-height: 38px;
-        font-size: 18px;
+        font-size: 14px;
         border-bottom: 1px solid #CCC;
     }
     .iframe-item-title-left{

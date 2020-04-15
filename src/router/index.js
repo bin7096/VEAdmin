@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import notFound from '@/views/404';
+import main from '@/App';
 import index from '@/views/index';
 import login from '@/views/login';
 import stylePicker from '@/views/stylePicker';
@@ -12,19 +13,26 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: index,
-      meta: { requireAuth: true },
+      component: main,
+      redirect: { name: 'index' },
       children: [
         {
-          path: '/login',
-          name: 'login',
-          component: login
+          path: 'index',
+          name: 'index',
+          component: index,
+          meta: { requireAuth: true }
         },
         {
-          path: '/stylePicker',
+          path: 'login',
+          name: 'login',
+          component: login,
+          meta: { requireAuth: true }
+        },
+        {
+          path: 'stylePicker',
           name: 'stylePicker',
-          component: stylePicker
+          component: stylePicker,
+          meta: { requireAuth: true }
         }
       ]
     },
@@ -42,7 +50,7 @@ router.beforeEach((to, from, next) => {
     let loginInfo = localStorage.getItem('login_info');
     loginInfo = loginInfo === null ? null : JSON.parse(loginInfo);
     if (loginInfo === null || !loginInfo.token || loginInfo.expireTime < time) {
-      next({ path: '/login' });
+      next({ path: 'login' });
     } else {
       const store = router.app.$options.store;
       store.commit('auth/setAuthToken', loginInfo.token);
